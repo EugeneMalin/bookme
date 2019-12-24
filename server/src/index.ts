@@ -3,7 +3,7 @@ import express from "express";
 import { createServer } from "http";
 import path from "path";
 import socketIO from "socket.io";
-import logger from './lib/log'
+import logger from "./lib/log";
 
 // initialize configuration
 dotenv.config();
@@ -20,7 +20,7 @@ app.set( "views", path.join( __dirname, "views" ) );
 app.set( "view engine", "ejs" );
 
 io.on("connection", (socket) => {
-    logger.info('connected!')
+    logger.info("connected!");
 });
 
 // define a route handler for the default home page
