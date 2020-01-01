@@ -1,7 +1,12 @@
 import React from 'react';
+import { Provider } from 'react-native-paper';
+import App from './src';
+import { theme } from './src/core/theme';
 
-import Navigator from './src/navigations';
+const Main = () => (
+  <Provider theme={theme}>
+    <App />
+  </Provider>
+);
 
-const App = () => <Navigator />;
-
-export default App;
+export default Main;
