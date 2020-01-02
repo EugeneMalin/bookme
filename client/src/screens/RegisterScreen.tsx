@@ -13,6 +13,7 @@ import {
   passwordValidator,
   nameValidator,
 } from '../core/utils';
+import { emit } from '../store';
 
 type Props = {
   navigation: Navigation;
@@ -35,7 +36,13 @@ const RegisterScreen = ({ navigation }: Props) => {
       return;
     }
 
-    navigation.navigate('Dashboard');
+    emit('signUp', {
+      username: name.value,
+      email: email.value,
+      password: password.value
+    }, 'singedUp').then(() => {
+      navigation.navigate('LoginScreen');
+    })
   };
 
   return (

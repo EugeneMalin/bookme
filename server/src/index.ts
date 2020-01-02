@@ -27,7 +27,7 @@ connection.sync().then(() => {
     io.on("connection", (socket) => {
         logger.info("person connected!");
 
-        const errorHandler = (message: string, event: string, type: string = "danger") => {
+        const send = (message: string, event: string, type: string = "danger") => {
             socket.emit("messaged", {
                 event,
                 message,
@@ -35,7 +35,7 @@ connection.sync().then(() => {
                 type
             });
 
-            logger.warn(`At event ${event} happened ${message}`);
+            logger[type === "danger" ? "warn" : "info"](`At event ${event} happened ${message}`);
         };
 
         socket.on("signUp", ({username, email, password}: IUser) => {
@@ -44,14 +44,14 @@ connection.sync().then(() => {
             res.then((user) => {
                 if (user) {
                     socket.emit("signedUp", {
-                        username
+                        status: true
                     });
-                    logger.info(`Signed up with ${username || email}`);
+                    send(`Signed up with ${username}, send confirm to ${email}`, "signup", "info");
                 }
             });
 
-            res.error((error) => errorHandler(JSON.stringify(error), "signup"));
-            res.catch((error) => errorHandler(JSON.stringify(error), "signup"));
+            res.error((error) => send(JSON.stringify(error), "signup"));
+            res.catch((error) => send(JSON.stringify(error), "signup"));
         });
         socket.on("signIn", ({username, email, password}: IUser) => {
             const query = [];
@@ -75,9 +75,9 @@ connection.sync().then(() => {
                             username: user.username,
                         });
                     }
-                    errorHandler(`Unright password for ${email || username}`, "signin");
+                    send(`Unright password for ${email || username}`, "signin");
                 }
-                errorHandler(`No user ${email || username}`, "signin");
+                send(`No user ${email || username}`, "signin");
             });
         });
     });
