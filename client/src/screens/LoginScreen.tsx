@@ -7,28 +7,37 @@ import Button from '../components/Button';
 import TextInput from '../components/TextInput';
 import BackButton from '../components/BackButton';
 import { theme } from '../core/theme';
-import { emailValidator, passwordValidator } from '../core/utils';
+import { nameValidator, passwordValidator } from '../core/utils';
 import { Navigation } from '../types';
+import { emit, store, actions } from '../store';
 
 type Props = {
   navigation: Navigation;
 };
 
 const LoginScreen = ({ navigation }: Props) => {
-  const [email, setEmail] = useState({ value: '', error: '' });
+  const [username, setUsername] = useState({ value: '', error: '' });
   const [password, setPassword] = useState({ value: '', error: '' });
 
   const _onLoginPressed = () => {
-    const emailError = emailValidator(email.value);
+    const usernameError = nameValidator(username.value);
     const passwordError = passwordValidator(password.value);
 
-    if (emailError || passwordError) {
-      setEmail({ ...email, error: emailError });
+    if (usernameError || passwordError) {
+      setUsername({ ...username, error: usernameError });
       setPassword({ ...password, error: passwordError });
       return;
     }
 
-    navigation.navigate('Dashboard');
+    emit('signIn', {
+      username: username.value,
+      password: password.value
+    }, 'signedIn').then(({success, user}) => {
+      if (success) {
+        store.dispatch(actions.gotUser(user));
+        navigation.navigate('Dashboard');
+      }
+    });
   };
 
   return (
@@ -40,16 +49,15 @@ const LoginScreen = ({ navigation }: Props) => {
       <Header>Welcome back.</Header>
 
       <TextInput
-        label="Email"
+        label="Username"
         returnKeyType="next"
-        value={email.value}
-        onChangeText={text => setEmail({ value: text, error: '' })}
-        error={!!email.error}
-        errorText={email.error}
+        value={username.value}
+        onChangeText={text => setUsername({ value: text, error: '' })}
+        error={!!username.error}
+        errorText={username.error}
         autoCapitalize="none"
-        autoCompleteType="email"
-        textContentType="emailAddress"
-        keyboardType="email-address"
+        autoCompleteType="username"
+        textContentType="username"
       />
 
       <TextInput
