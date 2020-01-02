@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
     backgroundColor: theme.colors.surface,
   },
   error: {
-    fontSize: 14,
+    fontSize: theme.sizes.small,
     color: theme.colors.error,
     paddingHorizontal: 4,
     paddingTop: 4,
