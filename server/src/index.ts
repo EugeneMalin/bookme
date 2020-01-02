@@ -28,25 +28,31 @@ connection.sync().then(() => {
     io.on("connection", (socket) => {
         logger.info("person connected!");
         socket.on("signUp", ({username, email, password}: IUser) => {
+            logger.info(`Try to sign up with ${username || email}`);
             const res = User.get({email, username, password}).save();
             res.then((user) => {
                 if (user) {
                     socket.emit("signedUp", {
                         username
                     });
+                    logger.info(`Signed up with ${username || email}`);
                 }
             });
+            logger.warn(`Signed up with ${username || email}`);
+
             res.error((reason) => {
                 socket.emit("error", {
                     error: reason,
                     event: "signup",
                 });
+                logger.error(`An error occupaited ${reason}`);
             });
             res.catch((error) => {
                 socket.emit("error", {
                     error,
                     event: "signup",
                 });
+                logger.error(`An error occupaited ${error}`);
             });
         });
         socket.on("signIn", ({username, email, password}: IUser) => {
