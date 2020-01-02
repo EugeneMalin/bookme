@@ -31,7 +31,8 @@ connection.sync().then(() => {
             socket.emit("messaged", {
                 event,
                 message,
-                status: false
+                status: false,
+                type
             });
 
             logger.warn(`At event ${event} happened ${message}`);
