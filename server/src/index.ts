@@ -4,10 +4,10 @@ import { createServer } from "http";
 import path from "path";
 import {Op} from "sequelize";
 import socketIO from "socket.io";
+import config from "./lib/config";
 import logger from "./lib/log";
 import { connection } from "./lib/sequelize";
 import User, { IUser } from "./model/user";
-
 // initialize configuration
 dotenv.config();
 
@@ -15,8 +15,7 @@ dotenv.config();
 // as if it were an environment variable
 const port = process.env.SERVER_PORT;
 const app = express();
-const http = createServer(app);
-const io = socketIO(http);
+const io = socketIO(createServer().listen(config.get("socketPort")));
 
 // Configure Express to use EJS
 app.set( "views", path.join( __dirname, "views" ) );
@@ -27,6 +26,17 @@ connection.sync().then(() => {
 
     io.on("connection", (socket) => {
         logger.info("person connected!");
+
+        const errorHandler = (message: string, event: string, type: string = "danger") => {
+            socket.emit("messaged", {
+                event,
+                message,
+                status: false
+            });
+
+            logger.warn(`At event ${event} happened ${message}`);
+        };
+
         socket.on("signUp", ({username, email, password}: IUser) => {
             logger.info(`Try to sign up with ${username || email}`);
             const res = User.get({email, username, password}).save();
@@ -38,27 +48,22 @@ connection.sync().then(() => {
                     logger.info(`Signed up with ${username || email}`);
                 }
             });
-            logger.warn(`Signed up with ${username || email}`);
 
-            res.error((reason) => {
-                socket.emit("error", {
-                    error: reason,
-                    event: "signup",
-                });
-                logger.error(`An error occupaited ${reason}`);
-            });
-            res.catch((error) => {
-                socket.emit("error", {
-                    error,
-                    event: "signup",
-                });
-                logger.error(`An error occupaited ${error}`);
-            });
+            res.error((error) => errorHandler(JSON.stringify(error), "signup"));
+            res.catch((error) => errorHandler(JSON.stringify(error), "signup"));
         });
         socket.on("signIn", ({username, email, password}: IUser) => {
+            const query = [];
+            if (username) {
+                query.push({username});
+            }
+            if (email) {
+                query.push({email});
+            }
+
             User.findOne({
                 where: {
-                    [Op.or]: [{username}, {email}]
+                    [Op.or]: query
                 }
             }).then((user) => {
                 if (user) {
@@ -69,19 +74,15 @@ connection.sync().then(() => {
                             username: user.username,
                         });
                     }
-                    socket.emit("error", {
-                        error: new Error(`Password ${email || username} isn't right`),
-                        event: "signin",
-                    });
+                    errorHandler(`Unright password for ${email || username}`, "signin");
                 }
-                socket.emit("error", {
-                    error: new Error(`No user ${email || username}`),
-                    event: "signin",
-                });
+                errorHandler(`No user ${email || username}`, "signin");
             });
         });
     });
 });
+
+createServer(app);
 
 // define a route handler for the default home page
 app.get( "/", ( req, res ) => {
