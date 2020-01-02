@@ -1,16 +1,29 @@
 import React, { memo } from 'react';
-import { Image, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
+import { theme } from '../core/theme';
+import { LOGO_TITLE, LOGO_SUBTITLE } from '../core/const';
 
 const Logo = () => (
-  <Image source={require('../assets/logo.png')} style={styles.image} />
+  <View>
+    <Text style={styles.title}>{LOGO_TITLE}</Text>
+    <Text style={styles.subtitle}>{LOGO_SUBTITLE}</Text>
+  </View>
 );
 
 const styles = StyleSheet.create({
-  image: {
-    width: 128,
-    height: 128,
-    marginBottom: 12,
+  title: {
+    fontSize: theme.sizes.huge,
+    color: theme.colors.primary,
+    fontWeight: 'bold',
+    paddingTop: 14,
+    textAlign: 'center'
   },
+  subtitle: {
+    fontSize: theme.sizes.medium,
+    color: theme.colors.primary,
+    paddingBottom: 14,
+    textAlign: 'right'
+  }
 });
 
 export default memo(Logo);
