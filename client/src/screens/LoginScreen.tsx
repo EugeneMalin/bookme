@@ -10,6 +10,7 @@ import { theme } from '../core/theme';
 import { nameValidator, passwordValidator } from '../core/utils';
 import { Navigation } from '../types';
 import { emit, store, actions } from '../store';
+import { showMessage } from 'react-native-flash-message';
 
 type Props = {
   navigation: Navigation;
@@ -32,10 +33,27 @@ const LoginScreen = ({ navigation }: Props) => {
     emit('signIn', {
       username: username.value,
       password: password.value
-    }, 'signedIn').then(({success, user}) => {
-      if (success) {
+    }, 'signedIn').then(({success, user, error}) => {
+      if (success && user) {
         store.dispatch(actions.gotUser(user));
         navigation.navigate('Dashboard');
+      } else {
+        switch(error.field) {
+          case 'username': {
+            setUsername({ ...username, error: error.message });
+            return;
+          }
+          case 'password': {
+            setPassword({ ...password, error: error.message });
+            return;
+          }
+          default: {
+            showMessage({
+              message: error.message, type: 'danger'
+            })
+            return;
+          }
+        }
       }
     });
   };

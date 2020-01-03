@@ -80,6 +80,10 @@ connection.sync().then(() => {
                 query.push({email});
             }
 
+            if (!query.length) {
+                send("You need username or email to sign in", "signin");
+            }
+
             User.findOne({
                 where: {
                     [Op.or]: query
@@ -88,14 +92,26 @@ connection.sync().then(() => {
                 if (user) {
                     if (user.check(password)) {
                         socket.emit("signedIn", {
-                            createdAt: user.createdAt,
-                            email: user.email,
-                            username: user.username,
+                            success: true,
+                            user: {
+                                createdAt: user.createdAt,
+                                email: user.email,
+                                username: user.username,
+                            },
                         });
+                        return;
                     }
-                    send(`Unright password for ${email || username}`, "signin");
+                    socket.emit("signedIn", {
+                        error: {
+                            field: "password",
+                            message: `Password is not right`
+                        },
+                        success: false
+                    });
+                    return;
                 }
-                send(`No user ${email || username}`, "signin");
+                send(`User with ${email || username} isn't exist`, "signin");
+                return;
             });
         });
     });
