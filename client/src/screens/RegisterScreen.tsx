@@ -13,7 +13,8 @@ import {
   passwordValidator,
   nameValidator,
 } from '../core/utils';
-import { emit } from '../store';
+import { emit, socket } from '../store';
+import { showMessage } from 'react-native-flash-message';
 
 type Props = {
   navigation: Navigation;
@@ -40,7 +41,26 @@ const RegisterScreen = ({ navigation }: Props) => {
       username: name.value,
       email: email.value,
       password: password.value
-    }, 'singedUp').then(() => {
+    }, 'signedUp').then(({success, error}) => {
+      if (!success) {
+        switch(error.field) {
+          case 'email': {
+            email.error = error.message;
+            setEmail({ ...email, error: error.message });
+            return;
+          }
+          case 'username': {
+            setName({ ...name, error: error.message });
+            return;
+          }
+          default: {
+            showMessage({
+              message: error.message, type: 'danger'
+            })
+            return;
+          }
+        }
+      }
       navigation.navigate('LoginScreen');
     })
   };

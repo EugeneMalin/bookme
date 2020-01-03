@@ -27,31 +27,49 @@ connection.sync().then(() => {
     io.on("connection", (socket) => {
         logger.info("person connected!");
 
-        const send = (message: string, event: string, type: string = "danger") => {
+        const send = (message: string, event: string, params: any = {type: "danger"}) => {
             socket.emit("messaged", {
                 event,
                 message,
-                status: false,
-                type
+                success: false,
+                ...params
             });
 
-            logger[type === "danger" ? "warn" : "info"](`At event ${event} happened ${message}`);
+            logger[params.type === "danger" ? "warn" : "info"](`At event ${event} happened ${message}`);
         };
 
         socket.on("signUp", ({username, email, password}: IUser) => {
             logger.info(`Try to sign up with ${username || email}`);
-            const res = User.get({email, username, password}).save();
-            res.then((user) => {
+            User.get({email, username, password}).save().then((user) => {
                 if (user) {
                     socket.emit("signedUp", {
-                        status: true
+                        success: true
                     });
                     send(`Signed up with ${username}, send confirm to ${email}`, "signup", "info");
                 }
+            }).catch((error: Error) => {
+                if (error.message.includes("users_email_key")) {
+                    socket.emit("signedUp", {
+                        error: {
+                            field: "email",
+                            message: `${email} has already used`
+                        },
+                        success: false
+                    });
+                    return;
+                }
+                if (error.message.includes("users_username_key")) {
+                    socket.emit("signedUp", {
+                        error: {
+                            field: "username",
+                            message: `${username} has already used`
+                        },
+                        success: false
+                    });
+                    return;
+                }
+                send(JSON.stringify(error.message), "signup");
             });
-
-            res.error((error) => send(JSON.stringify(error), "signup"));
-            res.catch((error) => send(JSON.stringify(error), "signup"));
         });
         socket.on("signIn", ({username, email, password}: IUser) => {
             const query = [];

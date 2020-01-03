@@ -11,15 +11,22 @@ const actions = {
 }
 
 interface IUser {
-    email?: string;
-    username?: string;
-    firstName?: string;
-    lastName?: string;
-    patronumic?: string;
+    email: string;
+    username: string;
+    firstName: string;
+    lastName: string;
+    patronumic: string;
+}
+
+interface IError {
+    message: string;
+    field: string;
 }
 
 interface IAnswer {
     success: boolean;
+
+    error?: IError;
 
     user?: IUser;
 }
