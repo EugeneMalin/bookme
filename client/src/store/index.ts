@@ -10,7 +10,7 @@ const actions = {
     gotUser
 }
 
-interface IUser {
+export interface IUser {
     email: string;
     username: string;
     firstName: string;
