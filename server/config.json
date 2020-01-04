@@ -1,9 +1,17 @@
 {
+	"address": "http://localhost:1337",
 	"port" : 1337,
 	"socketPort": 1338,
 	"security": {
         "tokenLife" : 3600
-    },
+	},
+	"email": {
+		"link": "verify",
+		"user": "logintemplate20@gmail.com",
+		"pass": "t4uq3tnm",
+		"server": "gmail",
+		"name": "logintemplate20@gmail.com"
+	},
 	"postgres": {
 		"host": "localhost",
 		"credits": {
