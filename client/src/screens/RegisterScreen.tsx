@@ -13,7 +13,7 @@ import {
   passwordValidator,
   nameValidator,
 } from '../core/utils';
-import { emit, socket } from '../store';
+import { emit } from '../store';
 import { showMessage } from 'react-native-flash-message';
 
 type Props = {
