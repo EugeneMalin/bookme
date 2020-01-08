@@ -10,7 +10,7 @@ type Props = {
 
 const UserInfo = ({ user }: Props) => 
     user ? (<View style={styles.container} >
-        <Avatar.Text size={theme.sizes.huge} label={user.username.slice(2)}></Avatar.Text>
+        <Avatar.Text size={theme.sizes.huge} label={user.username.slice(0, 2)}></Avatar.Text>
         <View style={styles.info}>
             <Text style={styles.username}>{user.username}</Text>
             <Text style={styles.email}>{user.email}</Text>

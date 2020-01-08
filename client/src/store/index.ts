@@ -16,6 +16,7 @@ export interface IUser {
     firstName: string;
     lastName: string;
     patronumic: string;
+    verified: string;
 }
 
 interface IError {

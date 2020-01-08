@@ -1,26 +1,9 @@
-import { createAppContainer } from 'react-navigation';
-import { createStackNavigator } from 'react-navigation-stack';
+import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 
-import {
-  HomeScreen,
-  LoginScreen,
-  RegisterScreen,
-  ForgotPasswordScreen,
-  Dashboard,
-} from './screens';
+import Registration from './navigation/Registration'
 
-const Router = createStackNavigator(
-  {
-    HomeScreen,
-    LoginScreen,
-    RegisterScreen,
-    ForgotPasswordScreen,
-    Dashboard,
-  },
-  {
-    initialRouteName: 'HomeScreen',
-    headerMode: 'none',
-  }
-);
-
-export default createAppContainer(Router);
+export default createAppContainer(createSwitchNavigator({
+  Registration
+}, {
+  initialRouteName: 'Registration',
+}));

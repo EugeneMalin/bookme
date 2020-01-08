@@ -36,7 +36,7 @@ const LoginScreen = ({ navigation }: Props) => {
     }, 'signedIn').then(({success, user, error}) => {
       if (success && user) {
         store.dispatch(actions.gotUser(user));
-        navigation.navigate('Dashboard');
+        navigation.navigate(user.verified ? 'Home' : 'Dashboard');
       } else {
         switch(error.field) {
           case 'username': {
