@@ -8,12 +8,17 @@ import {
   Folder as FolderIcon
 } from '@material-ui/icons';
 
-function App() {
-  const [value, setValue] = useState('recents')
+import { IApp } from './components/interface/IApp';
+
+function App(props: IApp) {
+  const [value, setValue] = useState('recents');
   return (
     <>
       <header>
         <h1>Саааайт</h1>
+        {
+          props.store.getState().user?.name
+        }
       </header>
       <main>
         <article>
