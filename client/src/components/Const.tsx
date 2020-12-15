@@ -12,14 +12,17 @@ import { IFooterButton } from './interface/IFooterButton';
 /**
  * Footer buttons
  */
-export enum BUTTONS {
+export enum PAGES {
     CONFIRM = 'confirm',
     CANCEL = 'cancel',
     BOOKS = 'books',
     PEOPLE = 'people',
     AUTH = 'auth',
     PROFILE = 'profile',
-    SETTINGS = 'settings'
+    SETTINGS = 'settings',
+
+    // unvisible element
+    NONE = 'none'
 }
 
 /**
@@ -27,12 +30,12 @@ export enum BUTTONS {
  */
 export const EDITOR_BUTTONS: IFooterButton[] = [{
     index: -2,
-    value: BUTTONS.CONFIRM,
+    value: PAGES.CONFIRM,
     label: '',
     icon: <CheckIcon />
 }, {
     index: -1,
-    value: BUTTONS.CANCEL,
+    value: PAGES.CANCEL,
     label: '',
     icon: <ClearIcon />
 }]
@@ -42,17 +45,17 @@ export const EDITOR_BUTTONS: IFooterButton[] = [{
  */
 export const DEFAULT_BUTTONS: IFooterButton[] = [{
     index: 2,
-    value: BUTTONS.BOOKS,
+    value: PAGES.BOOKS,
     label: 'Books',
     icon: <MenuBookIcon />
 }, {
     index: 3,
-    value: BUTTONS.PEOPLE,
+    value: PAGES.PEOPLE,
     label: 'People',
     icon: <PeopleAltIcon />
 }, {
     index: 1000,
-    value: BUTTONS.AUTH,
+    value: PAGES.AUTH,
     label: '',
     icon: <MeetingRoomIcon />
 }];
@@ -63,12 +66,12 @@ export const DEFAULT_BUTTONS: IFooterButton[] = [{
 export const USER_BUTTONS: IFooterButton[] = [
 ...DEFAULT_BUTTONS, {
     index: 0,
-    value: BUTTONS.PROFILE,
+    value: PAGES.PROFILE,
     label: 'Profile',
     icon: <PersonIcon />
 }, {
     index: 50,
-    value: BUTTONS.SETTINGS,
+    value: PAGES.SETTINGS,
     label: 'Settings',
     icon: <SettingsIcon />
 }];

@@ -1,3 +1,5 @@
+import { PAGES } from "../Const";
+
 /**
  * Footer component props interface
  */
@@ -25,7 +27,12 @@ export interface IFooter {
     };
 
     /**
+     * Identifier of selected button
+     */
+    id: string;
+
+    /**
      * Handler for toolbar item click
      */
-    onActionClick: (id: string, params: any) => void;
+    onActionClick: (id: PAGES, params?: any) => void;
 }

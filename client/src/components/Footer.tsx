@@ -2,7 +2,7 @@ import { BottomNavigation, BottomNavigationAction } from '@material-ui/core';
 import React, { useState } from 'react';
 import { IFooter } from './interface/IFooter';
 import { IFooterButton } from './interface/IFooterButton';
-import {USER_BUTTONS, EDITOR_BUTTONS, DEFAULT_BUTTONS} from './Const';
+import {USER_BUTTONS, EDITOR_BUTTONS, DEFAULT_BUTTONS, PAGES} from './Const';
 import { Theme, withStyles, createStyles } from '@material-ui/core';
 
 /**
@@ -35,13 +35,14 @@ const styles = (theme: Theme) => createStyles({
 export const Footer = withStyles(styles)((props: IFooter) => {
     const buttons: IFooterButton[] = getButtons(props.hasUser, props.isEdit).sort((a, b) => a.index - b.index);
 
-    const [value, setValue] = useState(buttons[0].value);
+    const [value, setValue] = useState(props.id);
 
     return (<footer className={props.className}>
-        <BottomNavigation className={props.classes?.toolbar} value={value} onChange={(e, value: string) => {
+        <BottomNavigation className={props.classes?.toolbar} value={value} onChange={(e, value: PAGES) => {
           setValue(value);
+          props.onActionClick(value);
         }}>
-            {buttons.map((button) => <BottomNavigationAction value={button.value} label={button.label} icon={button.icon}/>)}
+            {buttons.map((button) => <BottomNavigationAction key={button.value} value={button.value} label={button.label} icon={button.icon}/>)}
         </BottomNavigation>
     </footer>)
 })
