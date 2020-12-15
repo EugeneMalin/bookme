@@ -1,26 +1,36 @@
-import React, { useState } from 'react';
-import './App.css';
-import { BottomNavigation, BottomNavigationAction } from '@material-ui/core';
-import { 
-  Restore as RestoreIcon,
-  Favorite as FavoriteIcon,
-  LocationOn as LocationOnIcon,
-  Folder as FolderIcon
-} from '@material-ui/icons';
-
+import React from 'react';
+import { Theme, withStyles, createStyles } from '@material-ui/core';
 import { IApp } from './components/interface/IApp';
+import { Footer } from './components/Footer';
 
-function App(props: IApp) {
-  const [value, setValue] = useState('recents');
+const styles = (theme: Theme) => createStyles({
+  header: {
+    height: 80,
+    display: 'flex',
+    flexGrow: 0
+  },
+  main: {
+    display: 'flex',
+    flexDirection: 'column',
+    flexGrow: 1
+  },
+  footer: {
+    display: 'flex',
+    flexGrow: 0,
+    width: '100%'
+  }
+})
+
+const App = withStyles(styles)(({classes, store}: IApp) => {
   return (
     <>
-      <header>
+      <header className={classes.header}>
         <h1>Саааайт</h1>
         {
-          props.store.getState().user?.name
+          store.getState().user?.name
         }
       </header>
-      <main>
+      <main className={classes.main}>
         <article>
           <section>
             <h3>Section 1</h3>
@@ -32,18 +42,20 @@ function App(props: IApp) {
           </section>
         </article>
       </main>
-      <footer>
-        <BottomNavigation value={value} onChange={(e, value: string) => {
-          setValue(value);
-        }}>
-          <BottomNavigationAction label="Recents" value="recents" icon={<RestoreIcon />} />
-          <BottomNavigationAction label="Favorites" value="favorites" icon={<FavoriteIcon />} />
-          <BottomNavigationAction label="Nearby" value="nearby" icon={<LocationOnIcon />} />
-          <BottomNavigationAction label="Folder" value="folder" icon={<FolderIcon />} />
-        </BottomNavigation>
-        <span>Powered by Eugene Malin 2020</span>
-      </footer>
+      <Footer
+        className={classes.footer}
+        hasUser={!!store.getState().user}
+        isEdit={false}
+        onActionClick={(id, params) => {
+          switch(id) {
+
+            default:
+              return;
+          }
+        }}
+      />
     </>
   );
-}
+});
+
 export default App;
