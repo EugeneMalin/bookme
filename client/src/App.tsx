@@ -4,10 +4,10 @@ import { IApp } from './components/interface/IApp';
 import { Footer } from './components/Footer';
 import { PAGES } from './components/Const';
 import { Content } from './components/Content';
+import { Header } from './components/Header';
 
 const styles = (theme: Theme) => createStyles({
   header: {
-    height: 80,
     display: 'flex',
     flexGrow: 0
   },
@@ -27,12 +27,9 @@ const App = withStyles(styles)(({classes, store}: IApp) => {
 
   return (
     <>
-      <header className={classes.header}>
-        <h1>Саааайт</h1>
-        {
-          store.getState().user?.name
-        }
-      </header>
+      <Header
+        className={classes.header}
+      />
       <Content
         className={classes.main}
         id={id}
