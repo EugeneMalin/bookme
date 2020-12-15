@@ -17,6 +17,9 @@ export interface IFooter {
      */
     isEdit: boolean;
 
+    /**
+     * Css classes from withStyles modifyer
+     */
     classes?: {
         toolbar: string
     };
