@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Theme, withStyles, createStyles } from '@material-ui/core';
 import { IApp } from './components/interface/IApp';
 import { Footer } from './components/Footer';
+import { PAGES } from './components/Const';
+import { Content } from './components/Content';
 
 const styles = (theme: Theme) => createStyles({
   header: {
@@ -10,18 +12,19 @@ const styles = (theme: Theme) => createStyles({
     flexGrow: 0
   },
   main: {
-    display: 'flex',
-    flexDirection: 'column',
-    flexGrow: 1
+    flexGrow: 1,
+    overflowY: 'scroll'
   },
   footer: {
     display: 'flex',
     flexGrow: 0,
-    width: '100%'
+    width: '100%',
   }
 })
 
 const App = withStyles(styles)(({classes, store}: IApp) => {
+  const [id, setId] = useState(PAGES.NONE);
+
   return (
     <>
       <header className={classes.header}>
@@ -30,25 +33,21 @@ const App = withStyles(styles)(({classes, store}: IApp) => {
           store.getState().user?.name
         }
       </header>
-      <main className={classes.main}>
-        <article>
-          <section>
-            <h3>Section 1</h3>
-            <div>Some contetn</div>
-          </section>
-          <section>
-            <h3>Section 2</h3>
-            <div>Some contetn</div>
-          </section>
-        </article>
-      </main>
+      <Content
+        className={classes.main}
+        id={id}
+      />
       <Footer
         className={classes.footer}
+        id={id}
         hasUser={!!store.getState().user}
         isEdit={false}
         onActionClick={(id, params) => {
+          setId(id);
           switch(id) {
+            case PAGES.AUTH:
 
+              return;
             default:
               return;
           }

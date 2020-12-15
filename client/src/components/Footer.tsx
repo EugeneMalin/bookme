@@ -28,6 +28,12 @@ const styles = (theme: Theme) => createStyles({
     }
 });
 
+const StyledBottomNavigation = withStyles({
+    root: {
+        background: 'linear-gradient(to right, #005AA7, #FFFDE4)'   
+    }
+})(BottomNavigation)
+
 /**
  * Footer application component
  * @param props
@@ -38,11 +44,12 @@ export const Footer = withStyles(styles)((props: IFooter) => {
     const [value, setValue] = useState(props.id);
 
     return (<footer className={props.className}>
-        <BottomNavigation className={props.classes?.toolbar} value={value} onChange={(e, value: PAGES) => {
-          setValue(value);
-          props.onActionClick(value);
-        }}>
+        <StyledBottomNavigation className={props.classes?.toolbar} value={value} onChange={(e, value: PAGES) => {
+                setValue(value);
+                props.onActionClick(value);
+            }}
+        >
             {buttons.map((button) => <BottomNavigationAction key={button.value} value={button.value} label={button.label} icon={button.icon}/>)}
-        </BottomNavigation>
+        </StyledBottomNavigation>
     </footer>)
 })
