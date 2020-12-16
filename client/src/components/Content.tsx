@@ -2,6 +2,7 @@ import { IContent } from "./interface/IContent"
 import { PAGES } from "./Const";
 import { useTheme, createStyles, withStyles, Theme } from '@material-ui/core/styles';
 import { Tab } from "./Tab";
+import { Auth } from "./pages";
 
 /**
  * Getter for page index, some pages displayed on same index templates
@@ -75,7 +76,7 @@ export const Content = withStyles(styles)((props: IContent) => {
             className={props.classes?.auth}
             value={value} index={1}
         >
-            <div>Auth tab</div>
+            <Auth/>
         </Tab>
         <Tab
             className={props.classes?.book}

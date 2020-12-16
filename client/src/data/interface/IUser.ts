@@ -6,6 +6,15 @@ import { IPerson } from "./IPerson";
  * Interface of active user
  */
 export interface IUser extends IPerson {
+    /**
+     * Users contact email address
+     */
+    email: string,
+
+    /**
+     * Mark of user confirmation
+     */
+    confirmed?: boolean,
 
     /**
      * System username
