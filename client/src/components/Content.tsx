@@ -1,6 +1,6 @@
 import { IContent } from "./interface/IContent"
 import { PAGES } from "./Const";
-import { useTheme, createStyles, withStyles, Theme } from '@material-ui/core/styles';
+import { createStyles, withStyles, Theme } from '@material-ui/core/styles';
 import { Tab } from "./Tab";
 import { Auth } from "./pages";
 
@@ -50,7 +50,6 @@ const styles = (theme: Theme) => createStyles({
  * Main content application component
  */
 export const Content = withStyles(styles)((props: IContent) => {
-    const theme = useTheme();
     const value = getIndex(props.id);
 
     return <main className={`${props.className} ${props.classes?.base}`}>
