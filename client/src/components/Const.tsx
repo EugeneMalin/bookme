@@ -134,3 +134,5 @@ export const USER_FIELDS: IField<IUserInput>[] = [{
     type: 'password',
     required: true
 }];
+
+export const MAX_FIELD_WIDTH = 400;

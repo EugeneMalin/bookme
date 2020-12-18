@@ -16,6 +16,9 @@ const styles = (theme: Theme) => createStyles({
         width: 100,
         marginLeft: theme.spacing(1),
         marginTop: theme.spacing(1)
+    },
+    field: {
+        marginBottom: theme.spacing(1)
     }
 });
 
@@ -96,6 +99,7 @@ export const User = withStyles(styles)((props: IUserForm) => {
         {USER_FIELDS.map(field => (
             <TextField 
                 key={field.field}
+                className={props.classes?.field}
                 error={!!errors[field.field]}
                 value={values[field.field]}
                 type={field.type}
