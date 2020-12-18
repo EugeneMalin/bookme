@@ -7,7 +7,9 @@ import {
     Check as CheckIcon,
     Clear as ClearIcon
 } from '@material-ui/icons';
+import { IField } from './interface/IField';
 import { IFooterButton } from './interface/IFooterButton';
+import { IUserInput } from './interface/IUserInput';
 
 /**
  * Footer buttons
@@ -74,4 +76,61 @@ export const USER_BUTTONS: IFooterButton[] = [
     value: PAGES.SETTINGS,
     label: 'Settings',
     icon: <SettingsIcon />
+}];
+
+/**
+ * Min size of login name
+ */
+export const MIN_LOGIN_SIZE = 6;
+
+/**
+ * Min size of password
+ */
+export const MIN_PASSWORD_SIZE = 8;
+
+/**
+ * User fields config
+ */
+export const USER_FIELDS: IField<IUserInput>[] = [{
+    field: 'name',
+    label: 'Name',
+    helper: 'Your first name.',
+    type: 'text',
+    required: true
+}, {
+    field: 'surname',
+    label: 'Surname',
+    helper: 'Your second name.',
+    type: 'text'
+}, {
+    field: 'patronymic',
+    label: 'Patronymic',
+    type: 'text',
+    
+}, {
+    field: 'login',
+    label: 'Login',
+    helper: `Required length is ${MIN_LOGIN_SIZE} symbols.`,
+    type: 'text',
+    required: true
+    
+}, {
+    field: 'email',
+    label: 'Email address',
+    helper: "We'll never share your email.",
+    type: 'email',
+    required: true
+    
+}, {
+    field: 'password',
+    label: 'Password',
+    helper: `It should contain number and upper and lower case letter. Required length is ${MIN_PASSWORD_SIZE} symbols.`,
+    type: 'password',
+    required: true
+    
+}, {
+    field: 'rPassword',
+    label: 'Repeat password',
+    type: 'password',
+    required: true
 }];
