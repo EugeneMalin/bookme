@@ -6,6 +6,8 @@ import { MIN_LOGIN_SIZE, MIN_PASSWORD_SIZE, USER_FIELDS } from '../Const';
 import { IUserErrors } from '../interface/IUserErrors';
 import { IUserForm } from '../interface/IUserForm';
 import { IUserInput } from '../interface/IUserInput';
+import { addUser } from '../../data/UserDao';
+import red from '@material-ui/core/colors/red';
 
 const styles = (theme: Theme) => createStyles({
     buttons: {
@@ -19,6 +21,9 @@ const styles = (theme: Theme) => createStyles({
     },
     field: {
         marginBottom: theme.spacing(1)
+    },
+    errorBag: {
+        color: red[600]
     }
 });
 
@@ -89,11 +94,15 @@ export const User = withStyles(styles)((props: IUserForm) => {
         about: ''
     });
 
+    const [serverProblem, setServiceProblem] = useState<string>('');
+
     const [errors, setErrors] = useState<IUserErrors>({});
 
     const handleChange = (prop: keyof IUserInput) => (event: React.ChangeEvent<HTMLInputElement>) => {
         setValues({ ...values, [prop]: event.target.value });
     };
+
+    const serverProblemMark = serverProblem ? <div className={`${props.classes?.field} ${props.classes?.errorBag}`}>{serverProblem}</div> : null;
 
     return <>
         {USER_FIELDS.map(field => (
@@ -110,6 +119,8 @@ export const User = withStyles(styles)((props: IUserForm) => {
             />
         ))}
 
+        {serverProblemMark}
+
         <div className={props.classes?.buttons}>
             <Button className={props.classes?.button} variant="contained" onClick={ () => {
                 props.onReject();
@@ -122,16 +133,21 @@ export const User = withStyles(styles)((props: IUserForm) => {
                     return;
                 }
                 setErrors({})
-                props.onCommit({
-                    name: values.name,
-                    surname: values.surname,
-                    patronymic: values.patronymic,
-                    password: values.password,
-                    email: values.email,
-                    login: values.login
-                });
+                addUser({
+                        name: values.name,
+                        surname: values.surname,
+                        patronymic: values.patronymic,
+                        password: values.password,
+                        email: values.email,
+                        login: values.login
+                    }
+                ).then((user) => {
+                    props.onCommit(user);
+                }).catch((reason) => {
+                    setServiceProblem(reason);
+                })
             }}>
-                Save
+                Create
             </Button>
         </div>
     </>

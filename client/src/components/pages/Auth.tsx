@@ -1,6 +1,6 @@
 import { Theme, withStyles, createStyles, Dialog, Button
 } from '@material-ui/core';
-import { forwardRef, useState } from 'react';
+import { useState } from 'react';
 import { IUser } from '../../data/interface/IUser';
 import { User } from '../forms/User';
 import { IAuth } from '../interface/IAuth';
@@ -34,7 +34,6 @@ export const Auth = withStyles(styles)((props: IAuth) => {
             <div className={props.classes?.fieldsWrapper}>
                 <User
                     onCommit={(user: IUser) => {
-                        console.log(user);
                         setOpen(false);
                     }}
                     onReject={() => {

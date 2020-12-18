@@ -15,7 +15,8 @@ export interface IUserForm {
     classes?: {
         buttons: string,
         button: string,
-        field: string
+        field: string,
+        errorBag: string
     }
 
     /**
