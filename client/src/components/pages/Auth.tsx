@@ -1,10 +1,12 @@
 import { Theme, withStyles, createStyles, Dialog, Button
 } from '@material-ui/core';
 import { useState } from 'react';
-import { IUser } from '../../data/interface/IUser';
-import { User } from '../forms/User';
+import { User as UserForm } from '../forms/User';
 import { IAuth } from '../interface/IAuth';
 import { MAX_FIELD_WIDTH } from '../Const';
+import store from '../../store/store';
+import { User } from '../../data/User';
+import { addPerson } from '../../store/actionCreators/addPerson';
 
 const styles = (theme: Theme) => createStyles({
     fieldsWrapper: {
@@ -32,9 +34,10 @@ export const Auth = withStyles(styles)((props: IAuth) => {
 
         <Dialog fullScreen open={open} onClose={() => setOpen(false)}>
             <div className={props.classes?.fieldsWrapper}>
-                <User
-                    onCommit={(user: IUser) => {
+                <UserForm
+                    onCommit={(user: User) => {
                         setOpen(false);
+                        store.dispatch(addPerson(user.getPerson()))
                     }}
                     onReject={() => {
                         setOpen(false);
