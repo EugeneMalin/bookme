@@ -34,6 +34,7 @@ export const Auth = withStyles(styles)((props: IAuth) => {
         <Dialog fullScreen open={open} onClose={() => setOpen(false)}>
             <div className={props.classes?.fieldsWrapper}>
                 <UserForm
+                    caption='Sign Up'
                     onCommit={(user: User) => {
                         setOpen(false);
                         store.dispatch(addPerson(user.getPerson()))

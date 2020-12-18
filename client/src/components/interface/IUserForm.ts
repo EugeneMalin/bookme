@@ -11,6 +11,11 @@ export interface IUserForm {
     user?: IUser;
 
     /**
+     * Caption in editor
+     */
+    caption: string;
+
+    /**
      * CSS modifyers
      */
     classes?: {

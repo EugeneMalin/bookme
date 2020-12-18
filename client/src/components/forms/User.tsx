@@ -1,4 +1,4 @@
-import { Button, TextField, Theme, withStyles, createStyles } from '@material-ui/core';
+import { Button, TextField, Theme, withStyles, createStyles, Box } from '@material-ui/core';
 import { useState } from 'react';
 import { isUniqueLogin, isUniqueEmail } from '../../data/Network';
 import { isValidEmail } from '../../data/Helpers';
@@ -89,9 +89,9 @@ export const User = withStyles(styles)((props: IUserForm) => {
         name: '',
         surname: '',
         patronymic: '',
+        about: '',
 
-        gender: undefined,
-        about: ''
+        gender: undefined
     });
 
     const [serverProblem, setServiceProblem] = useState<string>('');
@@ -105,6 +105,9 @@ export const User = withStyles(styles)((props: IUserForm) => {
     const serverProblemMark = serverProblem ? <div className={`${props.classes?.field} ${props.classes?.errorBag}`}>{serverProblem}</div> : null;
 
     return <>
+        <Box>
+            <h2>{props.caption}</h2>
+        </Box>
         {USER_FIELDS.map(field => (
             <TextField 
                 key={field.field}
@@ -135,6 +138,7 @@ export const User = withStyles(styles)((props: IUserForm) => {
                 setErrors({})
                 addUser({
                         name: values.name,
+                        about: values.about,
                         surname: values.surname,
                         patronymic: values.patronymic,
                         password: values.password,

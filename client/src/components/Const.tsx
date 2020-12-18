@@ -108,6 +108,12 @@ export const USER_FIELDS: IField<IUserInput>[] = [{
     type: 'text',
     
 }, {
+    field: 'about',
+    label: 'About',
+    type: 'text',
+    helper: 'Something interesting about you.'
+    
+}, {
     field: 'login',
     label: 'Login',
     helper: `Required length is ${MIN_LOGIN_SIZE} symbols.`,
