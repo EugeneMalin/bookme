@@ -6,6 +6,7 @@ import { Person } from "../../data/Person";
 export interface IPeople {
     people?: Person[];
     classes?: {
-        empty: string
+        empty: string,
+        item: string
     }
 }

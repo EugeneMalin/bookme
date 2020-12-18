@@ -1,5 +1,5 @@
 import { IStore } from "../../data/interface/IStore";
-import { Theme, withStyles, createStyles, GridList, ListItem, ListItemAvatar, Avatar, ListItemText} from '@material-ui/core';
+import { Theme, withStyles, createStyles, Grid, ListItemAvatar, Box, Avatar, ListItemText, Paper} from '@material-ui/core';
 import { connect } from "react-redux";
 import { IPeople } from "../interface/IPeople";
 import { Person as PersonIcon} from '@material-ui/icons';
@@ -9,6 +9,11 @@ const styles = (theme: Theme) => createStyles({
     empty: {
         display: 'flex',
         justifyContent: 'center'
+    },
+    item: {
+        minWidth: 100,
+        maxWidth: 120,
+        overflow: 'hidden'
     }
 });
 
@@ -24,18 +29,22 @@ export const People = connect(
         <div>There is no one user here...</div>
     </div> : null
 
-    return <><GridList cellHeight={100}>
+    return <><Grid container spacing={3}>
         {
-            props.people?.map((person) => <ListItem key={person.getId()}>
-            <ListItemAvatar>
-              <Avatar>
-                <PersonIcon />
-              </Avatar>
-            </ListItemAvatar>
-            <ListItemText primary={person.getFullName()} secondary={person.about} />
-          </ListItem>)
+            props.people?.map((person) => <Grid item key={person.getId()}>
+            <Paper>
+                <Box p={2} className={props.classes?.item}>
+                    <ListItemAvatar>
+                        <Avatar>
+                            <PersonIcon />
+                        </Avatar>
+                    </ListItemAvatar>
+                    <ListItemText primary={person.getFullName()} secondary={person.about} />
+                </Box>
+            </Paper>
+          </Grid>)
         }
-    </GridList>
+    </Grid>
     {emptyView}
     </>;
 }));
