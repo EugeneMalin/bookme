@@ -1,5 +1,5 @@
 import { IUserAction } from "../../data/interface/IUserAction";
-import { CREATE_USER } from "../actions/createUser";
+import { LOGIN_USER } from "../actions/loginUser";
 import { DELETE_USER } from "../actions/deleteUser";
 import { LOGOUT_USER } from "../actions/logoutUser";
 import { UPDATE_USER } from "../actions/updateUser";
@@ -11,7 +11,7 @@ import { UPDATE_USER } from "../actions/updateUser";
  */
 export function userReducer(state = null, action: IUserAction) {
     switch(action.type) {
-        case CREATE_USER:
+        case LOGIN_USER:
             return action.user;
         case UPDATE_USER: 
             return {state, ...action.userData}

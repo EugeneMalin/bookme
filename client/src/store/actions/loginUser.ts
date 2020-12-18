@@ -1,4 +1,4 @@
 /**
  * Action that creates user in application
  */
-export const CREATE_USER = 'create_user';
+export const LOGIN_USER = 'create_in_app_user';
