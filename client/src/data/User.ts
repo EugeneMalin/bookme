@@ -1,4 +1,5 @@
 import { IUser } from "./interface/IUser";
+import { Person } from "./Person";
 
 /**
  * User data class
@@ -20,5 +21,9 @@ export class User implements IUser {
         this.name = params.name;
         this.surname = params.surname || '';
         this.patronymic = params.patronymic || '';
+    }
+
+    getPerson(): Person {
+        return new Person(this)
     }
 }
