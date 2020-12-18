@@ -2,7 +2,7 @@ import { IContent } from "./interface/IContent"
 import { PAGES } from "./Const";
 import { createStyles, withStyles, Theme } from '@material-ui/core/styles';
 import { Tab } from "./Tab";
-import { Auth } from "./pages";
+import { Auth, People } from "./pages";
 
 /**
  * Getter for page index, some pages displayed on same index templates
@@ -37,9 +37,7 @@ const styles = (theme: Theme) => createStyles({
     book: {
 
     }, 
-    people: {
-
-    },
+    people: {},
     spacing: {
         flexGrow: 1,
         flexShrink: 1
@@ -87,7 +85,7 @@ export const Content = withStyles(styles)((props: IContent) => {
             className={props.classes?.people}
             value={value} index={3}
         >
-            <div>People tab</div>
+            <People />
         </Tab>
         <div className={props.classes?.spacing}></div>
     </main>;

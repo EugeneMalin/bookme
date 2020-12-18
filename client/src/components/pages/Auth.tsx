@@ -1,5 +1,4 @@
-import { Theme, withStyles, createStyles, Dialog, Button
-} from '@material-ui/core';
+import { Theme, withStyles, createStyles, Dialog, Button} from '@material-ui/core';
 import { useState } from 'react';
 import { User as UserForm } from '../forms/User';
 import { IAuth } from '../interface/IAuth';

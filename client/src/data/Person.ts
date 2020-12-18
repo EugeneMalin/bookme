@@ -19,4 +19,12 @@ export class Person implements IPerson {
     isEqual(other: IPerson): boolean {
         return this.name === other.name && this.surname === other.surname && this.patronymic === other.patronymic;
     }
+
+    getFullName(): string {
+        return `${this.surname} ${this.name} ${this.patronymic}`.trim();
+    }
+
+    getId(): string {
+        return this.name + this.surname + this.patronymic
+    }
 }
