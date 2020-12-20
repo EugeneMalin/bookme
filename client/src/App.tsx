@@ -38,7 +38,6 @@ const App = withStyles(styles)(({classes, store}: IApp) => {
         className={classes.footer}
         id={id}
         hasUser={!!store.getState().user}
-        isEdit={false}
         onActionClick={(id, params) => {
           setId(id);
           switch(id) {

@@ -3,10 +3,9 @@ import {
     MenuBook as MenuBookIcon,
     MeetingRoom as MeetingRoomIcon,
     Person as PersonIcon,
-    Settings as SettingsIcon,
-    Check as CheckIcon,
-    Clear as ClearIcon
+    Settings as SettingsIcon
 } from '@material-ui/icons';
+import { IAuthInput } from './interface/IAuthInput';
 import { IField } from './interface/IField';
 import { IFooterButton } from './interface/IFooterButton';
 import { IUserInput } from './interface/IUserInput';
@@ -15,8 +14,6 @@ import { IUserInput } from './interface/IUserInput';
  * Footer buttons
  */
 export enum PAGES {
-    CONFIRM = 'confirm',
-    CANCEL = 'cancel',
     BOOKS = 'books',
     PEOPLE = 'people',
     AUTH = 'auth',
@@ -27,36 +24,29 @@ export enum PAGES {
     NONE = 'none'
 }
 
-/**
- * Footer buttons for editor page
- */
-export const EDITOR_BUTTONS: IFooterButton[] = [{
-    index: -2,
-    value: PAGES.CONFIRM,
-    label: '',
-    icon: <CheckIcon />
-}, {
-    index: -1,
-    value: PAGES.CANCEL,
-    label: '',
-    icon: <ClearIcon />
-}]
+export enum BUTTONS {
+    DEFAULT = 0,
+    BOOKS = 2,
+    PEOPLE = 3,
+    AUTH = 1000,
+    SETTINGS = 50
+}
 
 /**
  * Default buttons for unauthorizated user
  */
 export const DEFAULT_BUTTONS: IFooterButton[] = [{
-    index: 2,
+    index: BUTTONS.BOOKS,
     value: PAGES.BOOKS,
     label: 'Books',
     icon: <MenuBookIcon />
 }, {
-    index: 3,
+    index: BUTTONS.PEOPLE,
     value: PAGES.PEOPLE,
     label: 'People',
     icon: <PeopleAltIcon />
 }, {
-    index: 1000,
+    index: BUTTONS.AUTH,
     value: PAGES.AUTH,
     label: '',
     icon: <MeetingRoomIcon />
@@ -66,13 +56,8 @@ export const DEFAULT_BUTTONS: IFooterButton[] = [{
  * Buttons for authorizated buttons
  */
 export const USER_BUTTONS: IFooterButton[] = [
-...DEFAULT_BUTTONS, {
-    index: 0,
-    value: PAGES.PROFILE,
-    label: 'Profile',
-    icon: <PersonIcon />
-}, {
-    index: 50,
+...([...DEFAULT_BUTTONS]).filter((item) => item.index < 1000), {
+    index: BUTTONS.SETTINGS,
     value: PAGES.SETTINGS,
     label: 'Settings',
     icon: <SettingsIcon />
@@ -92,41 +77,37 @@ export const MIN_PASSWORD_SIZE = 8;
  * User fields config
  */
 export const USER_FIELDS: IField<IUserInput>[] = [{
+    field: 'surname',
+    label: 'Surname',
+    helper: 'Your second name.',
+    type: 'text'
+}, {
     field: 'name',
     label: 'Name',
     helper: 'Your first name.',
     type: 'text',
     required: true
 }, {
-    field: 'surname',
-    label: 'Surname',
-    helper: 'Your second name.',
-    type: 'text'
-}, {
     field: 'patronymic',
     label: 'Patronymic',
     type: 'text',
-    
 }, {
     field: 'about',
     label: 'About',
     type: 'text',
     helper: 'Something interesting about you.'
-    
 }, {
     field: 'login',
     label: 'Login',
     helper: `Required length is ${MIN_LOGIN_SIZE} symbols.`,
     type: 'text',
     required: true
-    
 }, {
     field: 'email',
     label: 'Email address',
     helper: "We'll never share your email.",
     type: 'email',
     required: true
-    
 }, {
     field: 'password',
     label: 'Password',
@@ -142,3 +123,23 @@ export const USER_FIELDS: IField<IUserInput>[] = [{
 }];
 
 export const MAX_FIELD_WIDTH = 400;
+
+/**
+ * Login fields config
+ */
+export const LOGIN_FIELDS: IField<IAuthInput>[] = [{
+    field: 'login',
+    label: 'Login',
+    helper: 'or use email field',
+    type: 'text',
+}, {
+    field: 'email',
+    label: 'Email address',
+    helper: 'or use login field',
+    type: 'email',
+}, {
+    field: 'password',
+    label: 'Password',
+    type: 'password',
+    required: true
+}]

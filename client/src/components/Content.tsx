@@ -16,6 +16,10 @@ function getIndex(buttonId: PAGES): number {
             return 2;
         case PAGES.PEOPLE:
             return 3;
+        case PAGES.PROFILE:
+            return 4;
+        case PAGES.SETTINGS:
+            return 5;
         case PAGES.NONE:
         default:
             return 0;
@@ -36,7 +40,13 @@ const styles = (theme: Theme) => createStyles({
     },
     book: {
 
-    }, 
+    },
+    profile: {
+
+    },
+    settings: {
+
+    },
     people: {},
     spacing: {
         flexGrow: 1,
@@ -86,6 +96,18 @@ export const Content = withStyles(styles)((props: IContent) => {
             value={value} index={3}
         >
             <People />
+        </Tab>
+        <Tab  
+            className={props.classes?.profile}
+            value={value} index={4}
+        >
+            <div>Profile</div>
+        </Tab>
+        <Tab  
+            className={props.classes?.settings}
+            value={value} index={5}
+        >
+            <div>Settings</div>
         </Tab>
         <div className={props.classes?.spacing}></div>
     </main>;

@@ -2,19 +2,14 @@ import { BottomNavigation, BottomNavigationAction } from '@material-ui/core';
 import React, { useState } from 'react';
 import { IFooter } from './interface/IFooter';
 import { IFooterButton } from './interface/IFooterButton';
-import {USER_BUTTONS, EDITOR_BUTTONS, DEFAULT_BUTTONS, PAGES} from './Const';
+import {USER_BUTTONS, DEFAULT_BUTTONS, PAGES} from './Const';
 import { Theme, withStyles, createStyles } from '@material-ui/core';
 
 /**
  * Getter for application buttons 
  * @param hasUser marker of authorized user
- * @param isEdit marker of editing item state
  */
-function getButtons(hasUser: boolean, isEdit: boolean): IFooterButton[] {
-    if (isEdit) {
-        return EDITOR_BUTTONS;
-    }
-
+function getButtons(hasUser: boolean): IFooterButton[] {
     if (hasUser) {
         return USER_BUTTONS;
     }
@@ -39,7 +34,7 @@ const StyledBottomNavigation = withStyles({
  * @param props
  */
 export const Footer = withStyles(styles)((props: IFooter) => {
-    const buttons: IFooterButton[] = getButtons(props.hasUser, props.isEdit).sort((a, b) => a.index - b.index);
+    const buttons: IFooterButton[] = getButtons(props.hasUser).sort((a, b) => a.index - b.index);
 
     const [value, setValue] = useState(props.id);
 
