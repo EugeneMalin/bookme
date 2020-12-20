@@ -11,8 +11,9 @@ const styles = (theme: Theme) => createStyles({
         justifyContent: 'center'
     },
     item: {
-        minWidth: 100,
-        maxWidth: 120,
+        width: 125,
+        height: 125,
+
         overflow: 'hidden'
     }
 });
