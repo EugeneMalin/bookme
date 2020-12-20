@@ -13,12 +13,7 @@ export interface IFooter {
      * Marker of active user
      */
     hasUser: boolean;
-
-    /**
-     * Marker of editing
-     */
-    isEdit: boolean;
-
+    
     /**
      * Css classes from withStyles modifyer
      */

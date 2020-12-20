@@ -25,6 +25,9 @@ export interface IContent {
         about: string;
         people: string;
         auth: string;
+        profile: string;
+        settings: string;
+
         base: string;
         spacing: string;
     };

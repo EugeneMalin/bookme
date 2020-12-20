@@ -7,6 +7,10 @@ import { IUser } from "../../data/interface/IUser";
  */
 export interface IAuth {
     classes?: {
-        fieldsWrapper: string
+        fieldsWrapper: string,
+        buttons: string,
+        button: string,
+        field: string,
+        errorBag: string
     };
 }
