@@ -2,7 +2,7 @@ import { IContent } from "./interface/IContent"
 import { PAGES } from "./Const";
 import { createStyles, withStyles, Theme } from '@material-ui/core/styles';
 import { Tab } from "./Tab";
-import { Auth, People } from "./pages";
+import { People } from "./pages";
 
 /**
  * Getter for page index, some pages displayed on same index templates
@@ -10,8 +10,6 @@ import { Auth, People } from "./pages";
  */
 function getIndex(buttonId: PAGES): number {
     switch(buttonId) {
-        case PAGES.AUTH:
-            return 1;
         case PAGES.BOOKS:
             return 2;
         case PAGES.PEOPLE:
@@ -33,9 +31,6 @@ const styles = (theme: Theme) => createStyles({
         backgroundColor: theme.palette.background.paper,
     },
     about: {
-
-    },
-    auth: {
 
     },
     book: {
@@ -78,12 +73,6 @@ export const Content = withStyles(styles)((props: IContent) => {
                     </ul>
                 </section>
             </article>
-        </Tab>
-        <Tab
-            className={props.classes?.auth}
-            value={value} index={1}
-        >
-            <Auth/>
         </Tab>
         <Tab
             className={props.classes?.book}

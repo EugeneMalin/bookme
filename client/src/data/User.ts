@@ -25,6 +25,17 @@ export class User implements IUser {
         this.about = params.about || '';
     }
 
+    update(params: IUser): void {
+        this.login = params.login;
+        this.password = params.password;
+        this.email = params.email;
+
+        this.name = params.name;
+        this.surname = params.surname || '';
+        this.patronymic = params.patronymic || '';
+        this.about = params.about || '';
+    }
+
     getPerson(): Person {
         return new Person(this)
     }

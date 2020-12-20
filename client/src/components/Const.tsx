@@ -1,9 +1,8 @@
 import { 
     PeopleAlt as PeopleAltIcon,
     MenuBook as MenuBookIcon,
-    MeetingRoom as MeetingRoomIcon,
-    Person as PersonIcon,
-    Settings as SettingsIcon
+    Settings as SettingsIcon,
+    Person as PersonIcon
 } from '@material-ui/icons';
 import { IAuthInput } from './interface/IAuthInput';
 import { IField } from './interface/IField';
@@ -16,7 +15,6 @@ import { IUserInput } from './interface/IUserInput';
 export enum PAGES {
     BOOKS = 'books',
     PEOPLE = 'people',
-    AUTH = 'auth',
     PROFILE = 'profile',
     SETTINGS = 'settings',
 
@@ -25,11 +23,12 @@ export enum PAGES {
 }
 
 export enum BUTTONS {
-    DEFAULT = 0,
     BOOKS = 2,
     PEOPLE = 3,
-    AUTH = 1000,
-    SETTINGS = 50
+    PROFILE = 4,
+    SETTINGS = 5,
+
+    DEFAULT = 0
 }
 
 /**
@@ -45,11 +44,6 @@ export const DEFAULT_BUTTONS: IFooterButton[] = [{
     value: PAGES.PEOPLE,
     label: 'People',
     icon: <PeopleAltIcon />
-}, {
-    index: BUTTONS.AUTH,
-    value: PAGES.AUTH,
-    label: '',
-    icon: <MeetingRoomIcon />
 }];
 
 /**
@@ -57,6 +51,11 @@ export const DEFAULT_BUTTONS: IFooterButton[] = [{
  */
 export const USER_BUTTONS: IFooterButton[] = [
 ...([...DEFAULT_BUTTONS]).filter((item) => item.index < 1000), {
+    index: BUTTONS.PROFILE,
+    value: PAGES.PROFILE,
+    label: 'Person',
+    icon: <PersonIcon />
+}, {
     index: BUTTONS.SETTINGS,
     value: PAGES.SETTINGS,
     label: 'Settings',

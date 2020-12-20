@@ -15,6 +15,14 @@ export function addUser(user: IUser): Promise<User> {
     })
 }
 
+
+export function updateUser(user: IUser): Promise<User> {
+    return readUser(user.login, user.email, user.password).then((usr) => {
+        usr.update(user);
+        return usr;
+    })
+}
+
 export function readUser(login: string|null, email: string|null, password: string): Promise<User> {
     return new Promise((resolve, reject) => {
         const usr = users.find(usr => (login && usr.login === login) || (email && usr.email === email))

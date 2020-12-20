@@ -41,9 +41,6 @@ const App = withStyles(styles)(({classes, store}: IApp) => {
         onActionClick={(id, params) => {
           setId(id);
           switch(id) {
-            case PAGES.AUTH:
-
-              return;
             default:
               return;
           }

@@ -13,4 +13,6 @@ export interface IAuth {
         field: string,
         errorBag: string
     };
+    onCommit: (user: IUser) => void; 
+    onReject: () => void;
 }

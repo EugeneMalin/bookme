@@ -6,7 +6,7 @@ import { MIN_LOGIN_SIZE, MIN_PASSWORD_SIZE, USER_FIELDS } from '../Const';
 import { IUserErrors } from '../interface/IUserErrors';
 import { IUserForm } from '../interface/IUserForm';
 import { IUserInput } from '../interface/IUserInput';
-import { addUser } from '../../data/UserDao';
+import { addUser, updateUser } from '../../data/UserDao';
 import red from '@material-ui/core/colors/red';
 
 const styles = (theme: Theme) => createStyles({
@@ -83,7 +83,7 @@ export function isValid(userTemplate: IUserInput): [boolean, IUserErrors] {
 export const User = withStyles(styles)((props: IUserForm) => {
     const [values, setValues] = useState<IUserInput>({
         password: '',
-        rPassword: '',
+        rPassword: props.user?.password || '',
         login: '',
         email: '',
         name: '',
@@ -91,7 +91,8 @@ export const User = withStyles(styles)((props: IUserForm) => {
         patronymic: '',
         about: '',
 
-        gender: undefined
+        gender: undefined,
+        ...props.user
     });
 
     const [serverProblem, setServiceProblem] = useState<string>('');
@@ -136,7 +137,8 @@ export const User = withStyles(styles)((props: IUserForm) => {
                     return;
                 }
                 setErrors({})
-                addUser({
+                if (!props.user) {
+                    addUser({
                         name: values.name,
                         about: values.about,
                         surname: values.surname,
@@ -144,14 +146,27 @@ export const User = withStyles(styles)((props: IUserForm) => {
                         password: values.password,
                         email: values.email,
                         login: values.login
-                    }
-                ).then((user) => {
+                    }).then((user) => {
+                        props.onCommit(user);
+                    }).catch((reason) => {
+                        setServiceProblem(reason);
+                    })
+                }
+                updateUser({
+                    name: values.name,
+                    about: values.about,
+                    surname: values.surname,
+                    patronymic: values.patronymic,
+                    password: values.password,
+                    email: values.email,
+                    login: values.login
+                }).then((user) => {
                     props.onCommit(user);
                 }).catch((reason) => {
                     setServiceProblem(reason);
                 })
             }}>
-                Create
+                {props.user ? 'Save' : 'Create' }
             </Button>
         </div>
     </>

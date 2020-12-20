@@ -4,6 +4,8 @@ import { IFooter } from './interface/IFooter';
 import { IFooterButton } from './interface/IFooterButton';
 import {USER_BUTTONS, DEFAULT_BUTTONS, PAGES} from './Const';
 import { Theme, withStyles, createStyles } from '@material-ui/core';
+import { connect } from 'react-redux';
+import { IStore } from '../data/interface/IStore';
 
 /**
  * Getter for application buttons 
@@ -33,7 +35,7 @@ const StyledBottomNavigation = withStyles({
  * Footer application component
  * @param props
  */
-export const Footer = withStyles(styles)((props: IFooter) => {
+const StyledFooter = withStyles(styles)((props: IFooter) => {
     const buttons: IFooterButton[] = getButtons(props.hasUser).sort((a, b) => a.index - b.index);
 
     const [value, setValue] = useState(props.id);
@@ -48,3 +50,7 @@ export const Footer = withStyles(styles)((props: IFooter) => {
         </StyledBottomNavigation>
     </footer>)
 })
+
+export const Footer = connect((state: IStore) => ({
+    user: state.user,
+  }))(StyledFooter);

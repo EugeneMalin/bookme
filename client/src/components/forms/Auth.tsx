@@ -1,6 +1,6 @@
-import { Theme, withStyles, createStyles, Dialog, Button, TextField} from '@material-ui/core';
+import { Theme, withStyles, createStyles, Dialog, Button, TextField, Box} from '@material-ui/core';
 import { useState } from 'react';
-import { User as UserForm } from '../forms/User';
+import { User as UserForm } from './User';
 import { IAuth } from '../interface/IAuth';
 import { LOGIN_FIELDS, MAX_FIELD_WIDTH, MIN_LOGIN_SIZE, MIN_PASSWORD_SIZE } from '../Const';
 import store from '../../store/store';
@@ -10,12 +10,11 @@ import red from '@material-ui/core/colors/red';
 import { IAuthInput } from '../interface/IAuthInput';
 import { IAuthError } from '../interface/IAuthError';
 import { readUser } from '../../data/UserDao';
-import { loginUser } from '../../store/actionCreators/loginUser';
 
 const styles = (theme: Theme) => createStyles({
     fieldsWrapper: {
         display: 'flex',
-        maxWidth: MAX_FIELD_WIDTH,
+        width: MAX_FIELD_WIDTH,
         flexDirection: 'column',
         margin: '0 auto'
     },
@@ -95,6 +94,10 @@ export const Auth = withStyles(styles)((props: IAuth) => {
     const serverProblemMark = problem ? <div className={`${props.classes?.field} ${props.classes?.errorBag}`}>{problem}</div> : null;
 
     return <div className={props.classes?.fieldsWrapper}>
+        <Box>
+            <h2>Log in</h2>
+        </Box>
+
         {LOGIN_FIELDS.map(field => (
             <TextField 
                 key={field.field}
@@ -112,6 +115,9 @@ export const Auth = withStyles(styles)((props: IAuth) => {
         {serverProblemMark}
 
         <div className={props.classes?.buttons}>
+            <Button className={props.classes?.button} variant="contained" onClick={ () => {
+                props.onReject();
+            }}>Cancel</Button>
             <Button className={props.classes?.button} variant="contained" color="primary" onClick={ () => {
                 const [valid, validation] = isValid(values)
                 if (!valid) {
@@ -124,7 +130,7 @@ export const Auth = withStyles(styles)((props: IAuth) => {
                     values?.email || '',
                     values?.password || ''
                 ).then((user) => {
-                    store.dispatch(loginUser(user));
+                    props.onCommit(user);
                 }).catch((reason) => {
                     setServiceProblem(reason);
                 });

@@ -24,7 +24,6 @@ export interface IContent {
         book: string;
         about: string;
         people: string;
-        auth: string;
         profile: string;
         settings: string;
 

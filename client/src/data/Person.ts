@@ -8,12 +8,15 @@ export class Person implements IPerson {
     about: string|undefined = '';
     gender: boolean|undefined = undefined;
 
+    private _id: number;
+
     constructor(personData: IPerson | IUser) {
         this.name = personData.name;
         this.surname = personData.surname;
         this.patronymic = personData.patronymic;
         this.about = personData.about;
         this.gender = personData.gender;
+        this._id = Math.round(Math.random() * 1000000);
     }
 
     isEqual(other: IPerson): boolean {
@@ -24,7 +27,7 @@ export class Person implements IPerson {
         return `${this.surname} ${this.name} ${this.patronymic}`.trim();
     }
 
-    getId(): string {
-        return this.name + this.surname + this.patronymic
+    getId(): number {
+        return this._id;
     }
 }
