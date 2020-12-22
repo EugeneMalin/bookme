@@ -1,8 +1,6 @@
 import { 
     PeopleAlt as PeopleAltIcon,
-    MenuBook as MenuBookIcon,
-    Settings as SettingsIcon,
-    Person as PersonIcon
+    MenuBook as MenuBookIcon
 } from '@material-ui/icons';
 import { IAuthInput } from './interface/IAuthInput';
 import { IField } from './interface/IField';
@@ -15,8 +13,6 @@ import { IUserInput } from './interface/IUserInput';
 export enum PAGES {
     BOOKS = 'books',
     PEOPLE = 'people',
-    PROFILE = 'profile',
-    SETTINGS = 'settings',
 
     // unvisible element
     NONE = 'none'
@@ -25,8 +21,6 @@ export enum PAGES {
 export enum BUTTONS {
     BOOKS = 2,
     PEOPLE = 3,
-    PROFILE = 4,
-    SETTINGS = 5,
 
     DEFAULT = 0
 }
@@ -50,17 +44,8 @@ export const DEFAULT_BUTTONS: IFooterButton[] = [{
  * Buttons for authorizated buttons
  */
 export const USER_BUTTONS: IFooterButton[] = [
-...([...DEFAULT_BUTTONS]).filter((item) => item.index < 1000), {
-    index: BUTTONS.PROFILE,
-    value: PAGES.PROFILE,
-    label: 'Person',
-    icon: <PersonIcon />
-}, {
-    index: BUTTONS.SETTINGS,
-    value: PAGES.SETTINGS,
-    label: 'Settings',
-    icon: <SettingsIcon />
-}];
+    ...DEFAULT_BUTTONS
+];
 
 /**
  * Min size of login name

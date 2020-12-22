@@ -3,7 +3,7 @@ import { Theme, withStyles, createStyles, Grid, ListItemAvatar, Box, Avatar, Lis
 import { connect } from "react-redux";
 import { IPeople } from "../interface/IPeople";
 import { Person as PersonIcon} from '@material-ui/icons';
-
+import { Empty } from "./Empty";
 
 const styles = (theme: Theme) => createStyles({
     empty: {
@@ -27,7 +27,7 @@ export const People = connect(
     }, null
 )(withStyles(styles)((props: IPeople) => {
     const emptyView = !props.people?.length ? <div className={props.classes?.empty}>
-        <div>There is no one user here...</div>
+        <Empty/>
     </div> : null
 
     return <><Grid container spacing={3}>

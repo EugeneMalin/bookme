@@ -22,10 +22,7 @@ export interface IContent {
      */
     classes?: {
         book: string;
-        about: string;
         people: string;
-        profile: string;
-        settings: string;
 
         base: string;
         spacing: string;
