@@ -1,7 +1,6 @@
 import { IPerson } from "../../data/interface/IPerson";
 import { IPersonAction } from "../../data/interface/IPersonAction";
 import { Person } from "../../data/Person";
-import { ADD_PEOPLE } from "../actions/addPeople";
 import { ADD_PERSON } from "../actions/addPerson";
 import { REMOVE_PERSON } from "../actions/removePerson";
 import { UPDATE_PERSON } from "../actions/updatePerson";
@@ -9,15 +8,10 @@ import { UPDATE_PERSON } from "../actions/updatePerson";
 export function peopleReducer(state: Person[] = [], action: IPersonAction) {
     switch(action.type) {
         case ADD_PERSON:
-            if (action.person) {
-                state.push(new Person(action.person))
+            if (action.person && !(state.filter(item => item.id === action.person?.id).length)) {
+                state.push(new Person({...action.person, id: state.length}))
             }
-            return state
-        case ADD_PEOPLE:
-            if (action.people) {
-                state.push(...(action.people.map(p => new Person(p))))
-            }
-            return state
+            return state;
         case REMOVE_PERSON:
             if (!action.person) {
                 return state
