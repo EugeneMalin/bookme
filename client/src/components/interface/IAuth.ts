@@ -1,4 +1,4 @@
-import { IUser } from "../../data/interface/IUser";
+import { User } from "../../data/User";
 
 /**
  * Interface of authetication page
@@ -13,6 +13,6 @@ export interface IAuth {
         field: string,
         errorBag: string
     };
-    onCommit: (user: IUser) => void; 
+    onCommit: (user: User) => void; 
     onReject: () => void;
 }

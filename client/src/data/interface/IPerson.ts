@@ -29,4 +29,9 @@ export interface IPerson {
      * Long description of user
      */
     about?: string;
+
+    /**
+     * Identifier of person
+     */
+    id?: number;
 }

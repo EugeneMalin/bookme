@@ -6,7 +6,7 @@ const users: User[] = [];
 export function addUser(user: IUser): Promise<User> {
     return new Promise((resolve, reject) => {
         if (!users.find(usr => usr.login === user.login || usr.email === user.email)) {
-            const nUser = new User(user);
+            const nUser = new User({id: users.length, ...user});
             resolve(nUser);
             users.push(nUser);
             return;

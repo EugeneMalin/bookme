@@ -13,6 +13,7 @@ export class User implements IUser {
     surname: string;
     patronymic: string;
     about: string;
+    id: number;
 
     constructor(params: IUser) {
         this.login = params.login;
@@ -23,6 +24,7 @@ export class User implements IUser {
         this.surname = params.surname || '';
         this.patronymic = params.patronymic || '';
         this.about = params.about || '';
+        this.id = params.id || 0;
     }
 
     update(params: IUser): void {

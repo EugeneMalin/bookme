@@ -7,8 +7,7 @@ export class Person implements IPerson {
     patronymic: string|undefined = '';
     about: string|undefined = '';
     gender: boolean|undefined = undefined;
-
-    private _id: number;
+    id: number = 0;
 
     constructor(personData: IPerson | IUser) {
         this.name = personData.name;
@@ -16,18 +15,14 @@ export class Person implements IPerson {
         this.patronymic = personData.patronymic;
         this.about = personData.about;
         this.gender = personData.gender;
-        this._id = Math.round(Math.random() * 1000000);
+        this.id = personData.id || 0;
     }
 
     isEqual(other: IPerson): boolean {
-        return this.name === other.name && this.surname === other.surname && this.patronymic === other.patronymic;
+        return this.id === other.id;
     }
 
     getFullName(): string {
         return `${this.surname} ${this.name} ${this.patronymic}`.trim();
-    }
-
-    getId(): number {
-        return this._id;
     }
 }

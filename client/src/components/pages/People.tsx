@@ -32,7 +32,7 @@ export const People = connect(
 
     return <><Grid container spacing={3}>
         {
-            props.people?.map((person) => <Grid item key={person.getId()}>
+            props.people?.map((person) => <Grid item key={person.id}>
             <Paper>
                 <Box p={2} className={props.classes?.item}>
                     <ListItemAvatar>
