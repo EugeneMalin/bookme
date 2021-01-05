@@ -1,9 +1,9 @@
-import { Column, Entity } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 import { IUser } from "./user.interface";
 
 @Entity()
 export class User implements IUser {
-    @Column()
+    @PrimaryGeneratedColumn()
     id: number;
     
     @Column()
