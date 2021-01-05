@@ -1,6 +1,7 @@
-import { Column, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 import { IList } from "./list.interface";
 
+@Entity()
 export class List implements IList {
 
     @PrimaryGeneratedColumn()

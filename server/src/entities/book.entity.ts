@@ -1,6 +1,7 @@
-import { Column, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 import { IBook } from "./book.interface";
 
+@Entity()
 export class Book implements IBook {
     @PrimaryGeneratedColumn()
     id: number;
