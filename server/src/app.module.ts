@@ -13,7 +13,6 @@ require('dotenv').config()
     database: process.env.DB_NAME,
     entities: ["dist/**/*.entity{.ts,.js}"],
     synchronize: !!process.env.DEBUG,
-  })],
-  controllers: [],
+  })]
 })
 export class AppModule {}
