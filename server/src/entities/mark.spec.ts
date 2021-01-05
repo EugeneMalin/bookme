@@ -1,6 +1,6 @@
 import { Mark } from "./mark.entity";
 
-describe('Person', () => {
+describe('Mark', () => {
     it('should be defined', () => {
         expect(new Mark()).toBeDefined();
     });
