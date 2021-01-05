@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { MarksModule } from './mark/mark.module';
 
 require('dotenv').config()
 
@@ -13,6 +14,6 @@ require('dotenv').config()
     database: process.env.DB_NAME,
     entities: ["dist/**/*.entity{.ts,.js}"],
     synchronize: !!process.env.DEBUG,
-  })]
+  }), MarksModule]
 })
 export class AppModule {}
