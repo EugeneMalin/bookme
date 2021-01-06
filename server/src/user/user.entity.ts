@@ -1,3 +1,4 @@
+import md5 from "md5";
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 import { IUser } from "./user.interface";
 
@@ -17,4 +18,8 @@ export class User implements IUser {
 
     @Column()
     password: string;
+
+    static hashPassword(password: string): string {
+        return md5(password);
+    }
 }
