@@ -1,23 +1,24 @@
 import md5 from "md5";
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Person } from "src/person/person.entity";
+import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { IUser } from "./user.interface";
 
 @Entity()
 export class User implements IUser {
     @PrimaryGeneratedColumn()
     id: number;
-    
-    @Column()
-    personId?: number;
 
-    @Column()
+    @Column({nullable: false})
     email: string;
 
-    @Column()
+    @Column({nullable: false, length: 16})
     login: string;
 
-    @Column()
+    @Column({nullable: false, length: 16})
     password: string;
+
+    @OneToOne(type => Person, {nullable: true})
+    person: Person;
 
     static hashPassword(password: string): string {
         return md5(password);

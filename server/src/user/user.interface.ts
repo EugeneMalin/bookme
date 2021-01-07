@@ -9,11 +9,6 @@ export interface IUser {
     id: number;
 
     /**
-     * Identifier of Person, person contains additional data of user
-     */
-    personId?: number;
-
-    /**
      * Email of user
      */
     email: string;

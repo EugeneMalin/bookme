@@ -2,6 +2,7 @@ import { Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from './user.entity';
+import { IUser } from './user.interface';
 
 /**
  * User DAO service
@@ -34,7 +35,7 @@ export class UserService {
      *  and create person only after email confirmed
      * @param user new user
      */
-    async create(user: User): Promise<User> {
+    async create(user: IUser): Promise<User> {
         const count: number = await Promise.all([this.usersRepository.count({
             email: user.email
         }), this.usersRepository.count({
@@ -66,7 +67,7 @@ export class UserService {
      * Updates user, if user not exists rejects
      * @param user new item
      */
-    async update(user: User): Promise<User> {
+    async update(user: IUser): Promise<User> {
         const oldItem = await this.usersRepository.findOne(user.id);
         if (!oldItem) {
             return Promise.reject()
