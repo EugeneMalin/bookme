@@ -14,6 +14,5 @@ export class Tag implements ITag {
     description: string;
 
     @ManyToMany(type => Book, book => book.tags)
-    @JoinTable()
     books: Book[]
 }

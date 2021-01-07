@@ -20,6 +20,5 @@ export class List implements IList {
     books: Book[];
 
     @ManyToMany(type => User, user => user.lists)
-    @JoinTable()
     users: User[];
 }

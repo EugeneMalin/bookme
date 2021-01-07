@@ -26,7 +26,6 @@ export class Book implements IBook {
     marks: Mark[];
 
     @ManyToMany(type => List, list => list.books)
-    @JoinTable()
     lists: List[]
 
     @ManyToMany(type => Tag, tag => tag.books)
