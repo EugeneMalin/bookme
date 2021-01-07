@@ -17,7 +17,7 @@ export class User implements IUser {
     @Column({nullable: false, length: 16})
     password: string;
 
-    @OneToOne(type => Person, {nullable: true})
+    @OneToOne(type => Person, {nullable: true, cascade: true})
     person: Person;
 
     static hashPassword(password: string): string {
