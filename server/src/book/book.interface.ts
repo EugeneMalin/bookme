@@ -14,11 +14,6 @@ export interface IBook {
     name: string;
 
     /**
-     * Link to author
-     */
-    authorId: number;
-
-    /**
      * Links to stores
      */
     link?: string;

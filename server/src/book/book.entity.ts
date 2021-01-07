@@ -1,13 +1,12 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Mark } from "src/mark/mark.entity";
+import { Person } from "src/person/person.entity";
+import { Column, Entity, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { IBook } from "./book.interface";
 
 @Entity()
 export class Book implements IBook {
     @PrimaryGeneratedColumn()
     id: number;
-
-    @Column()
-    authorId: number;
 
     @Column()
     name: string;
@@ -17,4 +16,10 @@ export class Book implements IBook {
 
     @Column()
     description?: string;
+
+    @OneToOne(type => Person)
+    author: Person;
+
+    @OneToMany(type => Mark, mark => mark.book)
+    marks: Mark[];
 }

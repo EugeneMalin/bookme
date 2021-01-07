@@ -9,11 +9,6 @@ export interface IMark {
     id: number;
 
     /**
-     * Indentifier of book
-     */
-    bookId: number;
-
-    /**
      * Count of mark
      */
     count: number;

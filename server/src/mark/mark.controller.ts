@@ -18,12 +18,4 @@ export class MarksController {
         Logger.log(`Deletes mark ${id} for ${'BOOK'} from ${'USER'}`)
         return this.marksService.remove(id);
     }
-
-    @Get('/book/:bookId')
-    getBookMarks(@Param('bookId') bookId: number): Promise<Mark[]> {
-        Logger.log(`Reads marks for ${bookId}`)
-        return this.marksService.findAll({
-            bookId
-        });
-    }
 }
