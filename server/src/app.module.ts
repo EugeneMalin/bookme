@@ -4,6 +4,7 @@ import { MarksModule } from './mark/mark.module';
 import { TagModule } from './tag/tag.module';
 import { UserModule } from './user/user.module';
 import { PersonModule } from './person/person.module';
+import { BookModule } from './book/book.module';
 
 require('dotenv').config()
 
@@ -17,6 +18,6 @@ require('dotenv').config()
     database: process.env.DB_NAME,
     entities: ["dist/**/*.entity{.ts,.js}"],
     synchronize: !!process.env.DEBUG,
-  }), MarksModule, TagModule, UserModule, PersonModule]
+  }), MarksModule, TagModule, UserModule, PersonModule, BookModule]
 })
 export class AppModule {}
