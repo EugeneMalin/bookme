@@ -18,7 +18,7 @@ require('dotenv').config()
     password: process.env.DB_PASS,
     database: process.env.DB_NAME,
     entities: ["dist/**/*.entity{.ts,.js}"],
-    synchronize: !!process.env.DEBUG,
+    synchronize: process.env.DEBUG === 'true',
   }), MarksModule, TagModule, UserModule, PersonModule, BookModule, ListModule]
 })
 export class AppModule {}

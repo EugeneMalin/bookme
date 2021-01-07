@@ -14,11 +14,6 @@ export interface IMark {
     bookId: number;
 
     /**
-     * Identifier of author of mark
-     */
-    userId: number;
-
-    /**
      * Count of mark
      */
     count: number;

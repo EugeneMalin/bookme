@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { User } from "src/user/user.entity";
+import { Column, Entity, JoinColumn, JoinTable, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { IMark } from "./mark.interface";
 
 @Entity()
@@ -11,11 +12,11 @@ export class Mark implements IMark {
     bookId: number;
 
     @Column()
-    userId: number;
-
-    @Column()
     count: number;
 
     @Column()
     description: string;
+
+    @ManyToOne(type => User, user => user.marks)
+    user: User;
 }
