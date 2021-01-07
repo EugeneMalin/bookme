@@ -1,6 +1,7 @@
 import { List } from "src/list/list.entity";
 import { Mark } from "src/mark/mark.entity";
 import { Person } from "src/person/person.entity";
+import { Tag } from "src/tag/tag.entity";
 import { Column, Entity, JoinColumn, JoinTable, ManyToMany, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { IBook } from "./book.interface";
 
@@ -27,4 +28,8 @@ export class Book implements IBook {
     @ManyToMany(type => List, list => list.books)
     @JoinTable()
     lists: List[]
+
+    @ManyToMany(type => Tag, tag => tag.books)
+    @JoinTable()
+    tags: Tag[]
 }
