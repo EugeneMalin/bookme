@@ -20,6 +20,7 @@ export class User implements IUser {
     password: string;
 
     @OneToOne(type => Person)
+    @JoinColumn()
     person: Person;
 
     @OneToMany(type => Mark, mark => mark.user)
