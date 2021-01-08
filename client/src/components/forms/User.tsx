@@ -1,12 +1,12 @@
 import { Button, TextField, Theme, withStyles, createStyles, Box } from '@material-ui/core';
 import { useState } from 'react';
-import { isUniqueLogin, isUniqueEmail } from '../../data/Network';
 import { isValidEmail } from '../../data/Helpers';
-import { MIN_LOGIN_SIZE, MIN_PASSWORD_SIZE, USER_FIELDS } from '../Const';
+import { ERRORS, MIN_LOGIN_SIZE, MIN_PASSWORD_SIZE, USER_FIELDS } from '../Const';
 import { IUserErrors } from '../interface/IUserErrors';
 import { IUserForm } from '../interface/IUserForm';
 import { IUserInput } from '../interface/IUserInput';
 import red from '@material-ui/core/colors/red';
+import { createUser } from '../../data/Network';
 
 const styles = (theme: Theme) => createStyles({
     buttons: {
@@ -43,27 +43,17 @@ export function isValid(userTemplate: IUserInput): [boolean, IUserErrors] {
         }
     })
 
-    if (!validation['login'] && userTemplate.login.length < MIN_LOGIN_SIZE - 1) {
+    if (!validation['login'] && userTemplate.login && userTemplate.login.length < MIN_LOGIN_SIZE - 1) {
         validation['login'] = `${userTemplate.login} is short login. Add ${MIN_LOGIN_SIZE - userTemplate.login.length} symbols.`
         result = false;
     }
 
-    if (!validation['login'] && !isUniqueLogin(userTemplate.login)) {
-        validation['login'] = `${userTemplate.login} is not unique.`
-        result = false;
-    }
-
-    if (!validation['email'] && !isValidEmail(userTemplate.email)) {
+    if (!validation['email'] && userTemplate.email && !isValidEmail(userTemplate.email)) {
         validation['email'] = `${userTemplate.email} is not valid email address.`
         result = false;
     }
 
-    if (!validation['email'] && !isUniqueEmail(userTemplate.email)) {
-        validation['email'] = `${userTemplate.email} is not unique.`
-        result = false;
-    }
-
-    if (!validation['password'] && userTemplate.password.length < MIN_PASSWORD_SIZE - 1) {
+    if (!validation['password'] && userTemplate.password && userTemplate.password?.length < MIN_PASSWORD_SIZE - 1) {
         validation['password'] = 'Your password is too short.'
         result = false;
     }
@@ -81,16 +71,10 @@ export function isValid(userTemplate: IUserInput): [boolean, IUserErrors] {
  */
 export const User = withStyles(styles)((props: IUserForm) => {
     const [values, setValues] = useState<IUserInput>({
-        password: '',
-        rPassword: props.user?.password || '',
-        login: '',
-        email: '',
-        name: '',
-        surname: '',
-        patronymic: '',
-        about: '',
-
-        gender: undefined,
+        password: 'qwertyuiop',
+        rPassword: props.user?.password || 'qwertyuiop',
+        login: 'qwertyuiop',
+        email: 'qwertyuiop@gfh.jh',
         ...props.user
     });
 
@@ -126,7 +110,7 @@ export const User = withStyles(styles)((props: IUserForm) => {
 
         <div className={props.classes?.buttons}>
             <Button className={props.classes?.button} variant="contained" onClick={ () => {
-                props.onReject();
+                props.onAction(false);
             }}>Cancel</Button>
             <Button className={props.classes?.button} variant="contained" color="primary" onClick={ () => {
                 const [valid, validation] = isValid(values);
@@ -136,34 +120,37 @@ export const User = withStyles(styles)((props: IUserForm) => {
                     return;
                 }
                 setErrors({})
-                /*if (!props.user) {
-                    addUser({
-                        name: values.name,
-                        about: values.about,
-                        surname: values.surname,
-                        patronymic: values.patronymic,
-                        password: values.password,
-                        email: values.email,
-                        login: values.login
-                    }).then((user) => {
-                        props.onCommit(user);
-                    }).catch((reason) => {
-                        setServiceProblem(reason);
-                    })
+
+                if (!values.login || !values.password || !values.email) {
+                    setServiceProblem("Please, try again, something's gone wrong!")
                 }
-                updateUser({
-                    name: values.name,
-                    about: values.about,
-                    surname: values.surname,
-                    patronymic: values.patronymic,
-                    password: values.password,
-                    email: values.email,
-                    login: values.login
-                }).then((user) => {
-                    props.onCommit(user);
-                }).catch((reason) => {
-                    setServiceProblem(reason);
-                })*/
+                createUser({
+                    login: values.login || '',
+                    password: values.password || '',
+                    email: values.email || ''
+                }).then(res => {
+                    if (res) {
+                        setServiceProblem(res.message);
+                        if (res.code === ERRORS.LOGIN_IS_NOT_UNIQUE) {
+                            setErrors({
+                                login: 'Is not unique.'
+                            })
+                        }
+                        if (res.code === ERRORS.EMAIL_IS_NOT_UNIQUE) {
+                            setErrors({
+                                email: 'Is not unique.'
+                            })
+                        }
+                        if (res.code === ERRORS.LOGIN_AND_EMAIL_IS_NOT_UNIQUE) {
+                            setErrors({
+                                login: 'Is not unique.',
+                                email: 'Is not unique.'
+                            })
+                        }
+                        return;
+                    }
+                    props.onAction(true);
+                })
             }}>
                 {props.user ? 'Save' : 'Create' }
             </Button>

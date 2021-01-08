@@ -1,5 +1,4 @@
 import { IUser } from "../../data/interface/IUser";
-import { User } from "../../data/User";
 
 /**
  * User form component props
@@ -28,10 +27,5 @@ export interface IUserForm {
     /**
      * Commit handler
      */
-    onCommit: (user: User) => void;
-
-    /**
-     * Reject handler
-     */
-    onReject: () => void;
+    onAction: (act: boolean) => void;
 }

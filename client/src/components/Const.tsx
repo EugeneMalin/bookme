@@ -7,6 +7,12 @@ import { IField } from './interface/IField';
 import { IFooterButton } from './interface/IFooterButton';
 import { IUserInput } from './interface/IUserInput';
 
+export enum ERRORS {
+    LOGIN_IS_NOT_UNIQUE = 1,
+    EMAIL_IS_NOT_UNIQUE,
+    LOGIN_AND_EMAIL_IS_NOT_UNIQUE
+}
+
 /**
  * Footer buttons
  */

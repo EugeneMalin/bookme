@@ -40,9 +40,7 @@ const styles = (theme: Theme) => createStyles({
  */
 const StyledHeader = withStyles(styles)((props: IHeader) => {
     const Icon = props.user ? PersonIcon : MeetingRoomIcon;
-    const form = props.user ? <><UserForm caption='Profile' user={props.user} onCommit={(user) => {
-        setOpen(false);
-    }} onReject={() => {
+    const form = props.user ? <><UserForm caption='Profile' user={props.user} onAction={() => {
         setOpen(false);
     }}/></> : <AuthForm onCommit={(user) => {
         setOpen(false);

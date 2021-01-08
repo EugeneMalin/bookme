@@ -146,10 +146,7 @@ export const Auth = withStyles(styles)((props: IAuth) => {
             <div className={props.classes?.fieldsWrapper}>
                 <UserForm
                     caption='Sign Up'
-                    onCommit={(user: User) => {
-                        setOpen(false);
-                    }}
-                    onReject={() => {
+                    onAction={() => {
                         setOpen(false);
                     }}
                 />
