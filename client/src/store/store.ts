@@ -1,11 +1,9 @@
 import { combineReducers, createStore, Store } from 'redux';
 import { IStore } from '../data/interface/IStore';
-import { peopleReducer } from './reducers/people';
-import { userReducer } from './reducers/user';
+import { systemReducer } from './system/reducer';
 
 const store: Store<IStore> = createStore(combineReducers({
-    user: userReducer,
-    people: peopleReducer
+    system: systemReducer
 }));
 
 export default store;
