@@ -6,7 +6,6 @@ import { MIN_LOGIN_SIZE, MIN_PASSWORD_SIZE, USER_FIELDS } from '../Const';
 import { IUserErrors } from '../interface/IUserErrors';
 import { IUserForm } from '../interface/IUserForm';
 import { IUserInput } from '../interface/IUserInput';
-import { addUser, updateUser } from '../../data/UserDao';
 import red from '@material-ui/core/colors/red';
 
 const styles = (theme: Theme) => createStyles({
@@ -137,7 +136,7 @@ export const User = withStyles(styles)((props: IUserForm) => {
                     return;
                 }
                 setErrors({})
-                if (!props.user) {
+                /*if (!props.user) {
                     addUser({
                         name: values.name,
                         about: values.about,
@@ -164,7 +163,7 @@ export const User = withStyles(styles)((props: IUserForm) => {
                     props.onCommit(user);
                 }).catch((reason) => {
                     setServiceProblem(reason);
-                })
+                })*/
             }}>
                 {props.user ? 'Save' : 'Create' }
             </Button>

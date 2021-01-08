@@ -9,7 +9,6 @@ import { addPerson } from '../../store/actionCreators/addPerson';
 import red from '@material-ui/core/colors/red';
 import { IAuthInput } from '../interface/IAuthInput';
 import { IAuthError } from '../interface/IAuthError';
-import { readUser } from '../../data/UserDao';
 
 const styles = (theme: Theme) => createStyles({
     fieldsWrapper: {
@@ -25,6 +24,9 @@ const styles = (theme: Theme) => createStyles({
     button: {
         width: 100,
         marginLeft: theme.spacing(1),
+        marginTop: theme.spacing(1)
+    },
+    signUp: {
         marginTop: theme.spacing(1)
     },
     field: {
@@ -125,7 +127,7 @@ export const Auth = withStyles(styles)((props: IAuth) => {
                     return;
                 }
                 setErrors({});
-                readUser(
+                /* readUser(
                     values?.login || '',
                     values?.email || '',
                     values?.password || ''
@@ -133,11 +135,11 @@ export const Auth = withStyles(styles)((props: IAuth) => {
                     props.onCommit(user);
                 }).catch((reason) => {
                     setServiceProblem(reason);
-                });
+                });*/
             }}>Enter</Button>
         </div>
 
-        <div>
+        <div className={props.classes?.signUp}>
             If you have no account just 
             <LinkButton color="primary" onClick={() => setOpen(true)}>sign up</LinkButton>
         </div>

@@ -11,7 +11,8 @@ export interface IAuth {
         buttons: string,
         button: string,
         field: string,
-        errorBag: string
+        errorBag: string,
+        signUp: string;
     };
     onCommit: (user: User) => void; 
     onReject: () => void;
