@@ -5,40 +5,21 @@ import { Person } from "./Person";
  * User data class
  */
 export class User implements IUser {
+    id: number;
     login: string;
     email: string;
     password: string;
-
-    name: string;
-    surname: string;
-    patronymic: string;
-    about: string;
-    id: number;
 
     constructor(params: IUser) {
         this.login = params.login;
         this.password = params.password;
         this.email = params.email;
-
-        this.name = params.name;
-        this.surname = params.surname || '';
-        this.patronymic = params.patronymic || '';
-        this.about = params.about || '';
-        this.id = params.id || 0;
+        this.id = params.id || -1;
     }
 
     update(params: IUser): void {
         this.login = params.login;
         this.password = params.password;
         this.email = params.email;
-
-        this.name = params.name;
-        this.surname = params.surname || '';
-        this.patronymic = params.patronymic || '';
-        this.about = params.about || '';
-    }
-
-    getPerson(): Person {
-        return new Person(this)
     }
 }

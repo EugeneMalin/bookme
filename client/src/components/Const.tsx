@@ -56,31 +56,35 @@ export const MIN_LOGIN_SIZE = 6;
  * Min size of password
  */
 export const MIN_PASSWORD_SIZE = 8;
+/*
+export const PERSON_FEILDS: IField<IPersonInput>[] = [{
+    {
+        field: 'surname',
+        label: 'Surname',
+        helper: 'Your second name.',
+        type: 'text'
+    }, {
+        field: 'name',
+        label: 'Name',
+        helper: 'Your first name.',
+        type: 'text',
+        required: true
+    }, {
+        field: 'patronymic',
+        label: 'Patronymic',
+        type: 'text',
+    }, {
+        field: 'about',
+        label: 'About',
+        type: 'text',
+        helper: 'Something interesting about you.'
+    }
+}] */
 
 /**
  * User fields config
  */
 export const USER_FIELDS: IField<IUserInput>[] = [{
-    field: 'surname',
-    label: 'Surname',
-    helper: 'Your second name.',
-    type: 'text'
-}, {
-    field: 'name',
-    label: 'Name',
-    helper: 'Your first name.',
-    type: 'text',
-    required: true
-}, {
-    field: 'patronymic',
-    label: 'Patronymic',
-    type: 'text',
-}, {
-    field: 'about',
-    label: 'About',
-    type: 'text',
-    helper: 'Something interesting about you.'
-}, {
     field: 'login',
     label: 'Login',
     helper: `Required length is ${MIN_LOGIN_SIZE} symbols.`,

@@ -1,20 +1,13 @@
-import { IBook } from "./IBook";
-import { IList } from "./IList";
-import { IPerson } from "./IPerson";
-
 /**
  * Interface of active user
  */
-export interface IUser extends IPerson {
+export interface IUser {
+    id?: number;
+
     /**
      * Users contact email address
      */
     email: string,
-
-    /**
-     * Mark of user confirmation
-     */
-    confirmed?: boolean,
 
     /**
      * System username
@@ -25,14 +18,4 @@ export interface IUser extends IPerson {
      * Hash of users password
      */
     password: string;
-
-    /**
-     * Lists of user books
-     */
-    lists?: IList[];
-
-    /**
-     * List of books without list, they are private by default 
-     */
-    books?: IBook[];
 }

@@ -9,7 +9,7 @@ export class Person implements IPerson {
     gender: boolean|undefined = undefined;
     id: number = 0;
 
-    constructor(personData: IPerson | IUser) {
+    constructor(personData: IPerson) {
         this.name = personData.name;
         this.surname = personData.surname;
         this.patronymic = personData.patronymic;
