@@ -3,9 +3,7 @@ import { useState } from 'react';
 import { User as UserForm } from './User';
 import { IAuth } from '../interface/IAuth';
 import { LOGIN_FIELDS, MAX_FIELD_WIDTH, MIN_LOGIN_SIZE, MIN_PASSWORD_SIZE } from '../Const';
-import store from '../../store/store';
 import { User } from '../../data/User';
-import { addPerson } from '../../store/actionCreators/addPerson';
 import red from '@material-ui/core/colors/red';
 import { IAuthInput } from '../interface/IAuthInput';
 import { IAuthError } from '../interface/IAuthError';
@@ -150,7 +148,6 @@ export const Auth = withStyles(styles)((props: IAuth) => {
                     caption='Sign Up'
                     onCommit={(user: User) => {
                         setOpen(false);
-                        store.dispatch(addPerson(user.getPerson()))
                     }}
                     onReject={() => {
                         setOpen(false);

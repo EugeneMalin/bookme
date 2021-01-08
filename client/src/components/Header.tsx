@@ -10,9 +10,6 @@ import { IStore } from '../data/interface/IStore';
 import { useState } from 'react';
 import { Auth as AuthForm } from './forms/Auth';
 import { User as UserForm } from './forms/User';
-import store from '../store/store';
-import { logoutUser } from '../store/actionCreators/logoutUser';
-import { loginUser } from '../store/actionCreators/loginUser';
 import { MAX_FIELD_WIDTH } from './Const';
 
 const styles = (theme: Theme) => createStyles({
@@ -48,7 +45,6 @@ const StyledHeader = withStyles(styles)((props: IHeader) => {
     }} onReject={() => {
         setOpen(false);
     }}/></> : <AuthForm onCommit={(user) => {
-        store.dispatch(loginUser(user));
         setOpen(false);
     }}  onReject={() => {
         setOpen(false);
@@ -58,7 +54,6 @@ const StyledHeader = withStyles(styles)((props: IHeader) => {
         if (!props.user) {
             return;
         }
-        store.dispatch(logoutUser(props.user))
     }}><MeetingRoomIcon/></IconButton> : null;
 
     return <header className={`${props.className} ${props.classes?.header}`}>

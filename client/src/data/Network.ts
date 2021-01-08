@@ -1,3 +1,5 @@
+import 'isomorphic-fetch';
+
 /**
  * todo realease me
  * @param login string with login
