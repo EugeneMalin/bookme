@@ -1,4 +1,5 @@
 import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import { error } from 'console';
 import { User } from './user.entity';
 import { IUser } from './user.interface';
 import { UserService } from './user.service';
@@ -18,8 +19,8 @@ export class UserController {
     }
 
     @Post()
-    create(@Body() userDto: IUser): Promise<number> {
-        return this.usersService.create(userDto).then(mark => mark.id);
+    create(@Body() userDto: IUser): Promise<void> {
+        return this.usersService.create(userDto).catch(err => err);
     }
 
     @Delete(':id')

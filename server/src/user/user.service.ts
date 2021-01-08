@@ -35,22 +35,28 @@ export class UserService {
      *  and create person only after email confirmed
      * @param user new user
      */
-    async create(user: IUser): Promise<User> {
-        const count: number = await Promise.all([this.usersRepository.count({
+    async create(user: IUser): Promise<void> {
+        const counts: {
+            usersWithEmail: number,
+            usersWithlogin: number
+        } = await Promise.all([this.usersRepository.count({
             email: user.email
         }), this.usersRepository.count({
             login: user.login
-        })]).then(([count1, count2]) => count1 + count2);
+        })]).then(([count1, count2]) => ({
+            usersWithEmail: count1,
+            usersWithlogin: count2
+        }));
 
-        if (count) {
+        if (counts.usersWithEmail || counts.usersWithlogin) {
             Logger.warn(`Try to create user with existed login "${user.login}" or email "${user.email}"`);
-            return Promise.reject()
+            return Promise.reject({message: 'User is exists!', code: counts.usersWithlogin ? counts.usersWithEmail ? 3 : 1 : 2})
         }
 
         const usr = this.usersRepository.create(user)
         Logger.log(`Creates user ${user.login}`)
         // todo add person creation
-        return this.usersRepository.save(usr)
+        this.usersRepository.save(usr)
     }
 
     /**
