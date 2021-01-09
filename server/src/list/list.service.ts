@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { DEFAULT_LIMIT } from 'src/common/const';
-import { IFilter } from 'src/common/filter.interface';
+import { DEFAULT_LIMIT } from '../common/const';
+import { IFilter } from '../common/filter.interface';
 import { Repository } from 'typeorm';
 import { List } from './list.entity';
 import { IList } from './list.interface';

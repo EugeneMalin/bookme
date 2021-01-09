@@ -1,5 +1,5 @@
-import { Book } from "src/book/book.entity";
-import { User } from "src/user/user.entity";
+import { Book } from "../book/book.entity";
+import { User } from "../user/user.entity";
 import { Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
 import { IList } from "./list.interface";
 

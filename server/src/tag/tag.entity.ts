@@ -1,4 +1,4 @@
-import { Book } from "src/book/book.entity";
+import { Book } from "../book/book.entity";
 import { Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
 import { ITag } from "./tag.interface";
 

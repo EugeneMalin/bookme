@@ -1,7 +1,7 @@
-import { List } from "src/list/list.entity";
-import { Mark } from "src/mark/mark.entity";
-import { Person } from "src/person/person.entity";
-import { Tag } from "src/tag/tag.entity";
+import { List } from "../list/list.entity";
+import { Mark } from "../mark/mark.entity";
+import { Person } from "../person/person.entity";
+import { Tag } from "../tag/tag.entity";
 import { Column, Entity, JoinTable, ManyToMany, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { IBook } from "./book.interface";
 

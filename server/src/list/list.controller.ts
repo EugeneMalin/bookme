@@ -1,5 +1,5 @@
 import { Body, Controller, Delete, Get, Logger, Param, Post, Put } from '@nestjs/common';
-import { IListParams } from 'src/common/listParam.interface';
+import { IListParams } from '../common/listParam.interface';
 import { List } from './list.entity';
 import { IList } from './list.interface';
 import { ListService } from './list.service';

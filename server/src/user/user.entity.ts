@@ -1,7 +1,7 @@
 import md5 from "md5";
-import { List } from "src/list/list.entity";
-import { Mark } from "src/mark/mark.entity";
-import { Person } from "src/person/person.entity";
+import { List } from "../list/list.entity";
+import { Mark } from "../mark/mark.entity";
+import { Person } from "../person/person.entity";
 import { Column, Entity, JoinColumn, JoinTable, ManyToMany, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { IUser } from "./user.interface";
 
