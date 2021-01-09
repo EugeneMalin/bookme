@@ -17,7 +17,11 @@ describe('UserService', () => {
   });
 
   it('should create user'), async () => {
-    const creationRes = await service.create({login: 'test12', password: 'testtest', email: 'email@asda.asa'})
-    expect(creationRes).toBe(Number);
+    const testEmail = 'email@asda.asa';
+    const testLogin = 'test12';
+    const creationRes = await service.create({login: testLogin, password: 'testtest', email: testEmail})
+    expect(creationRes.password).toBeUndefined();
+    expect(creationRes.email).toBe(testEmail);
+    expect(creationRes.login).toBe(testLogin);
   }
 });
