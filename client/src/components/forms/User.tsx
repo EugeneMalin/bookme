@@ -128,28 +128,28 @@ export const User = withStyles(styles)((props: IUserForm) => {
                     login: values.login || '',
                     password: values.password || '',
                     email: values.email || ''
-                }).then(res => {
+                }).then(() => {
+                    props.onAction(true);
+                }).catch((res) => {
                     if (res) {
                         setServiceProblem(res.message);
-                        if (res.code === ERRORS.LOGIN_IS_NOT_UNIQUE) {
+                        if (res.statusCode === ERRORS.LOGIN_IS_NOT_UNIQUE) {
                             setErrors({
                                 login: 'Is not unique.'
                             })
                         }
-                        if (res.code === ERRORS.EMAIL_IS_NOT_UNIQUE) {
+                        if (res.statusCode === ERRORS.EMAIL_IS_NOT_UNIQUE) {
                             setErrors({
                                 email: 'Is not unique.'
                             })
                         }
-                        if (res.code === ERRORS.LOGIN_AND_EMAIL_IS_NOT_UNIQUE) {
+                        if (res.statusCode === ERRORS.LOGIN_AND_EMAIL_IS_NOT_UNIQUE) {
                             setErrors({
                                 login: 'Is not unique.',
                                 email: 'Is not unique.'
                             })
                         }
-                        return;
                     }
-                    props.onAction(true);
                 })
             }}>
                 {props.user ? 'Save' : 'Create' }

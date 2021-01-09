@@ -1,4 +1,4 @@
-import { Injectable, Logger } from '@nestjs/common';
+import { Injectable, InternalServerErrorException, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from './user.entity';
@@ -35,7 +35,7 @@ export class UserService {
      *  and create person only after email confirmed
      * @param user new user
      */
-    async create(user: IUser): Promise<void> {
+    async create(user: IUser): Promise<Partial<User>> {
         const counts: {
             usersWithEmail: number,
             usersWithlogin: number
@@ -50,13 +50,18 @@ export class UserService {
 
         if (counts.usersWithEmail || counts.usersWithlogin) {
             Logger.warn(`Try to create user with existed login "${user.login}" or email "${user.email}"`);
-            return Promise.reject({message: 'User is exists!', code: counts.usersWithlogin ? counts.usersWithEmail ? 3 : 1 : 2})
+            throw new InternalServerErrorException({message: 'User is exists!',
+             statusCode: counts.usersWithlogin ? counts.usersWithEmail ? 3 : 1 : 2})
         }
 
         const usr = this.usersRepository.create(user)
         Logger.log(`Creates user ${user.login}`)
         // todo add person creation
-        this.usersRepository.save(usr)
+        return this.usersRepository.save(usr).then((savedUser) => ({
+            login: savedUser.login,
+            id: savedUser.id,
+            email: savedUser.email
+        }));
     }
 
     /**

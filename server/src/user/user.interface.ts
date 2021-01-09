@@ -6,7 +6,7 @@ export interface IUser {
     /**
      * Identifier of User
      */
-    id: number;
+    id?: number;
 
     /**
      * Email of user

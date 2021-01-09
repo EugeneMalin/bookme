@@ -15,4 +15,9 @@ describe('UserService', () => {
   it('should be defined', () => {
     expect(service).toBeDefined();
   });
+
+  it('should create user'), async () => {
+    const creationRes = await service.create({login: 'test12', password: 'testtest', email: 'email@asda.asa'})
+    expect(creationRes).toBe(Number);
+  }
 });
