@@ -1,5 +1,4 @@
 import { Body, Controller, Delete, Get, Param, Post, Put, Req, Res } from '@nestjs/common';
-import { error } from 'console';
 import { User } from './user.entity';
 import { IUser } from './user.interface';
 import { UserService } from './user.service';

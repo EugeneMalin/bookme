@@ -54,14 +54,13 @@ export class UserService {
              statusCode: counts.usersWithlogin ? counts.usersWithEmail ? 3 : 1 : 2})
         }
 
-        const usr = this.usersRepository.create(user)
+        const usr = this.usersRepository.create({
+            ...user,
+            password: User.hashPassword(user.password)
+        })
         Logger.log(`Creates user ${user.login}`)
         // todo add person creation
-        return this.usersRepository.save(usr).then((savedUser) => ({
-            login: savedUser.login,
-            id: savedUser.id,
-            email: savedUser.email
-        }));
+        return this.usersRepository.save(usr);
     }
 
     /**
