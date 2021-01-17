@@ -1,3 +1,4 @@
+import { InternalServerErrorException } from "@nestjs/common";
 import { Test } from "@nestjs/testing";
 import { getRepositoryToken } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
@@ -53,6 +54,17 @@ describe('User service', () => {
     });
 
     describe('create', () => {
+        const userDtoWithSameLogin: IUser = {
+            login: userDto.login,
+            email: 'tester@module1.com',
+            password: '1234567890'
+        };
+        const userDtoWithSameEmail: IUser = {
+            login: 'testerUser1',
+            email: userDto.email,
+            password: '1234567890'
+        };
+        
         beforeEach(() => {
             jest.spyOn(repo, 'count').mockImplementation((conditionds) => {
                 return Promise.resolve(
@@ -84,6 +96,27 @@ describe('User service', () => {
             expect(created.email).toBe(userDto.email);
             expect(created.login).toBe(userDto.login);
             expect(created.password).toBe(User.hashPassword(userDto.password));
+        })
+
+        it('shouldn\'t create full double user', () => {
+            return service.create(userDto).then(() => service.create(userDto).catch((e: InternalServerErrorException) => {
+                expect(e.getStatus()).toBe(500);
+                expect(e.message).toBe('User is exists!');
+            }))
+        })
+
+        it('shouldn\'t create user with same email', () => {
+            return service.create(userDto).then(() => service.create(userDtoWithSameEmail).catch((e: InternalServerErrorException) => {
+                expect(e.getStatus()).toBe(500);
+                expect(e.message).toBe('User is exists!');
+            }))
+        })
+
+        it('shouldn\'t create user with same login', () => {
+            return service.create(userDto).then(() => service.create(userDtoWithSameLogin).catch((e: InternalServerErrorException) => {
+                expect(e.getStatus()).toBe(500);
+                expect(e.message).toBe('User is exists!');
+            }))
         })
     })
 
