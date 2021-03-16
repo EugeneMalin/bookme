@@ -1,6 +1,6 @@
-<mxfile host="65bd71144e" modified="2021-01-07T13:39:02.920Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Code/1.52.1 Chrome/83.0.4103.122 Electron/9.3.5 Safari/537.36" etag="kCRbOTj8yqoY9h64VkzW" version="13.10.0" type="embed">
-    <diagram id="aSdYf6prPh5pmuAx1HA3" name="Страница 1">
-        <mxGraphModel dx="1186" dy="575" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+<mxfile>
+    <diagram id="aSdYf6prPh5pmuAx1HA3" name="classes">
+        <mxGraphModel dx="974" dy="319" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -137,6 +137,58 @@
                         </Array>
                     </mxGeometry>
                 </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+    <diagram id="dwmF8VWhUSIiUjqGcRf4" name="deploy">
+        <mxGraphModel dx="734" dy="575" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+            <root>
+                <mxCell id="sbcl9JrKanrzrpBZ7rRG-0"/>
+                <mxCell id="sbcl9JrKanrzrpBZ7rRG-1" parent="sbcl9JrKanrzrpBZ7rRG-0"/>
+                <mxCell id="Rlk3ToZjV12SQLVM8KRB-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="sbcl9JrKanrzrpBZ7rRG-1" source="Rlk3ToZjV12SQLVM8KRB-0" target="Rlk3ToZjV12SQLVM8KRB-1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="Rlk3ToZjV12SQLVM8KRB-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="sbcl9JrKanrzrpBZ7rRG-1" source="Rlk3ToZjV12SQLVM8KRB-0" target="Rlk3ToZjV12SQLVM8KRB-7">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="Rlk3ToZjV12SQLVM8KRB-0" value="npm build в корне проекта" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="sbcl9JrKanrzrpBZ7rRG-1">
+                    <mxGeometry x="40" y="40" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="Rlk3ToZjV12SQLVM8KRB-1" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#1ba1e2;strokeColor=#006EAF;fontColor=#ffffff;" vertex="1" parent="sbcl9JrKanrzrpBZ7rRG-1">
+                    <mxGeometry x="240" y="40" width="520" height="200" as="geometry"/>
+                </mxCell>
+                <mxCell id="Rlk3ToZjV12SQLVM8KRB-2" value="Сборка клиентских модулей" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="sbcl9JrKanrzrpBZ7rRG-1">
+                    <mxGeometry x="240" y="20" width="300" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="Rlk3ToZjV12SQLVM8KRB-4" value="npm build для каждого модуля из client" style="shape=document;whiteSpace=wrap;html=1;boundedLbl=1;" vertex="1" parent="sbcl9JrKanrzrpBZ7rRG-1">
+                    <mxGeometry x="260" y="60" width="120" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="Rlk3ToZjV12SQLVM8KRB-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="sbcl9JrKanrzrpBZ7rRG-1" source="Rlk3ToZjV12SQLVM8KRB-1" target="Rlk3ToZjV12SQLVM8KRB-1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="Rlk3ToZjV12SQLVM8KRB-7" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#1ba1e2;strokeColor=#006EAF;fontColor=#ffffff;" vertex="1" parent="sbcl9JrKanrzrpBZ7rRG-1">
+                    <mxGeometry x="240" y="280" width="520" height="200" as="geometry"/>
+                </mxCell>
+                <mxCell id="Rlk3ToZjV12SQLVM8KRB-11" value="Собрка серверных модулей" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="sbcl9JrKanrzrpBZ7rRG-1">
+                    <mxGeometry x="240" y="260" width="300" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="Rlk3ToZjV12SQLVM8KRB-14" value="npm build для каждого модуля из server" style="shape=document;whiteSpace=wrap;html=1;boundedLbl=1;" vertex="1" parent="sbcl9JrKanrzrpBZ7rRG-1">
+                    <mxGeometry x="260" y="300" width="120" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="Rlk3ToZjV12SQLVM8KRB-17" value="npm start в корне проекта" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="sbcl9JrKanrzrpBZ7rRG-1">
+                    <mxGeometry x="40" y="520" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="Rlk3ToZjV12SQLVM8KRB-20" value="npm test в корне проекта" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="sbcl9JrKanrzrpBZ7rRG-1">
+                    <mxGeometry x="40" y="640" width="120" height="60" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+    <diagram id="JyWb8WN2gdAxtfIP5KEz" name="auth-logic">
+        <mxGraphModel grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" page="1" fold="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+            <root>
+                <mxCell id="6Me3nuiwVt_DVuxtpKVY-0"/>
+                <mxCell id="6Me3nuiwVt_DVuxtpKVY-1" parent="6Me3nuiwVt_DVuxtpKVY-0"/>
             </root>
         </mxGraphModel>
     </diagram>
