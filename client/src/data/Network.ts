@@ -43,3 +43,11 @@ export function fetchThenDispatch<K, T>(
 export function createUser(userDto: IUser): Promise<void|NetworkResult> {
     return fetchThenDispatch<IUser, void|NetworkResult>('user', 'POST', userDto);
 }
+
+export function readUser(password: string, login?: string, email?: string): Promise<void|NetworkResult> {
+    return fetchThenDispatch<Partial<IUser>, void|NetworkResult>('user', 'GET', {
+        email,
+        login,
+        password
+    })
+}
