@@ -1,11 +1,10 @@
+import { createMuiTheme } from '@material-ui/core';
 import { 
     PeopleAlt as PeopleAltIcon,
     MenuBook as MenuBookIcon
 } from '@material-ui/icons';
-import { IAuthInput } from './interface/IAuthInput';
-import { IField } from './interface/IField';
-import { IFooterButton } from './interface/IFooterButton';
-import { IUserInput } from './interface/IUserInput';
+
+export const ReadMeTheme = createMuiTheme();
 
 export enum ERRORS {
     LOGIN_IS_NOT_UNIQUE = 1,
@@ -32,9 +31,9 @@ export enum BUTTONS {
 }
 
 /**
- * Default buttons for unauthorizated user
+ * Default buttons for user
  */
-export const DEFAULT_BUTTONS: IFooterButton[] = [{
+export const DEFAULT_BUTTONS: any[] = [{
     index: BUTTONS.BOOKS,
     value: PAGES.BOOKS,
     label: 'Books',
@@ -46,12 +45,6 @@ export const DEFAULT_BUTTONS: IFooterButton[] = [{
     icon: <PeopleAltIcon />
 }];
 
-/**
- * Buttons for authorizated buttons
- */
-export const USER_BUTTONS: IFooterButton[] = [
-    ...DEFAULT_BUTTONS
-];
 
 /**
  * Min size of login name
@@ -90,7 +83,7 @@ export const PERSON_FEILDS: IField<IPersonInput>[] = [{
 /**
  * User fields config
  */
-export const USER_FIELDS: IField<IUserInput>[] = [{
+export const USER_FIELDS: any[] = [{
     field: 'login',
     label: 'Login',
     helper: `Required length is ${MIN_LOGIN_SIZE} symbols.`,
@@ -121,7 +114,7 @@ export const MAX_FIELD_WIDTH = 400;
 /**
  * Login fields config
  */
-export const LOGIN_FIELDS: IField<IAuthInput>[] = [{
+export const LOGIN_FIELDS: any[] = [{
     field: 'login',
     label: 'Login',
     helper: 'or use email field',

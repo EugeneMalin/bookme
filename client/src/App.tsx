@@ -1,12 +1,11 @@
-import React, { useState } from 'react';
-import { Theme, withStyles, createStyles } from '@material-ui/core';
-import { IApp } from './components/interface/IApp';
-import { Footer } from './components/Footer';
-import { PAGES } from './components/Const';
-import { Content } from './components/Content';
-import { Header } from './components/Header';
+import React from 'react';
+import { makeStyles } from '@material-ui/styles';
 
-const styles = (theme: Theme) => createStyles({
+export interface IApp {
+
+}
+
+const useStyles = makeStyles({
   header: {
     display: 'flex',
     flexGrow: 0
@@ -20,34 +19,17 @@ const styles = (theme: Theme) => createStyles({
     flexGrow: 0,
     width: '100%',
   }
-})
+});
 
-const App = withStyles(styles)(({classes, store}: IApp) => {
-  const [id, setId] = useState(PAGES.NONE);
-
+export const App = (props: IApp) => {
+  const classes = useStyles()
   return (
     <>
-      <Header
-        className={classes.header}
-      />
-      <Content
-        className={classes.main}
-        id={id}
-      />
-      <Footer
-        className={classes.footer}
-        id={id}
-        hasUser={!!store.getState().user}
-        onActionClick={(id, params) => {
-          setId(id);
-          switch(id) {
-            default:
-              return;
-          }
-        }}
-      />
+      <header className={classes.header} >Привет мир!</header>
+      <main className={classes.main} >Привет мир!</main>
+      <footer className={classes.footer} >Привет мир!</footer>
     </>
   );
-});
+};
 
 export default App;
