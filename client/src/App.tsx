@@ -49,15 +49,20 @@ export const App = (props: IApp) => {
         className={classes.header}
         onLogIn={() => {
           setOpen(true);
-          setUser({
-            name: 'Василий'
-          });
-          setTimeout(() => setOpen(false), 1000)
+          setTimeout(() => {
+            setOpen(false)
+        
+            setUser({
+              name: 'Василий'
+            });
+          }, 1000)
         }}
         onLogOut={() => {
           setOpen(true);
-          setUser(null);
-          setTimeout(() => setOpen(false), 1000)
+          setTimeout(() => {
+            setOpen(false);
+            setUser(null);
+          }, 1000)
         }}
         onSignUp={() => {
           setOpen(true);
