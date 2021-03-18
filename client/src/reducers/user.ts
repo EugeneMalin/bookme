@@ -14,6 +14,6 @@ export const reducer = (store: IUser|null = null, action: IUserAction) => {
         case UserAction.Set: 
             return action.user;
         default:
-            return null;
+            return store;
     }
 }
