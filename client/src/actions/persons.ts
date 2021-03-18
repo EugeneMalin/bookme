@@ -53,3 +53,7 @@ export const filter = (filter: IFilter) => {
         filter
     }
 }
+
+export const actions = {
+    add, remove, addAll, removeAll, filter
+}

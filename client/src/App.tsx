@@ -35,6 +35,8 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
+let index = 0;
+
 export const App = () => {
   const [open, setOpen] = useState(false);
 
@@ -70,7 +72,11 @@ export const App = () => {
         }}
         onSignUp={() => {
           setOpen(true);
-          setTimeout(() => setOpen(false), 1000)
+          setTimeout(() => setOpen(false), 1000);
+          dispatch(actions.persons.add({
+            id: index++,
+            name: `Person #${index}`
+          }))
         }}
         onReadNotifications={() => {
           setOpen(true);
