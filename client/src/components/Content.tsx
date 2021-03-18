@@ -11,11 +11,16 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     wrapper: {
         display: 'flex',
+        flexDirection: 'column',
         flexGrow: 1,
-        flexWrap: 'wrap',
         height: '100%',
         width: '100%',
         backgroundColor: theme.palette.background.paper
+    },
+    persons: {
+        display: 'flex',
+        flexWrap: 'wrap',
+        margin: theme.spacing(0.5)
     },
     person: {
         height: 150,
@@ -33,6 +38,8 @@ export const Content = (props: IContent) => {
     const tabId = useSelector<IStore, string>(store => store.tabId);
     return <main className={classes.wrapper + ' ' + props.className}>
         <h3>{tabId}</h3>
-        {persons}
+        <div className={classes.persons}>
+            {persons}
+        </div>
     </main>
 }

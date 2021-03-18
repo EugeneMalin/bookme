@@ -18,16 +18,15 @@ const useStyles = makeStyles((theme: Theme) =>
       minHeight: 0,
       minWidth: 0,
       flexGrow: 1,
-      padding: `${theme.spacing()}px auto ${theme.spacing()}px auto`,
-      maxWidth: 1024
+      margin: theme.spacing()
     },
     header: {
       display: 'flex',
-      flexGrow: 0
+      flexGrow: 0,
     },
     main: {
       flexGrow: 1,
-      overflowY: 'scroll'
+      overflowY: 'scroll',
     },
     footer: {
       display: 'flex',
