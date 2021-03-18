@@ -141,7 +141,7 @@
         </mxGraphModel>
     </diagram>
     <diagram id="jOGFQzyrnlKx5A-1VcFP" name="Page-2">
-        <mxGraphModel dx="734" dy="575" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+        <mxGraphModel dx="734" dy="319" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
             <root>
                 <mxCell id="GUaNuJlXd1SZs9sNp0NW-0"/>
                 <mxCell id="GUaNuJlXd1SZs9sNp0NW-1" parent="GUaNuJlXd1SZs9sNp0NW-0"/>
@@ -151,7 +151,7 @@
                 <mxCell id="GUaNuJlXd1SZs9sNp0NW-3" value="Background" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="GUaNuJlXd1SZs9sNp0NW-1">
                     <mxGeometry x="40" y="50" width="580" height="20" as="geometry"/>
                 </mxCell>
-                <mxCell id="GUaNuJlXd1SZs9sNp0NW-4" value="- умеет отображать Backdrop&lt;br&gt;- меняет вкладки&lt;br&gt;" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;darkOpacity=0.05;fillColor=#1ba1e2;strokeColor=#006EAF;fontColor=#ffffff;" vertex="1" parent="GUaNuJlXd1SZs9sNp0NW-1">
+                <mxCell id="GUaNuJlXd1SZs9sNp0NW-4" value="- отображает контентную панель" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;darkOpacity=0.05;fillColor=#1ba1e2;strokeColor=#006EAF;fontColor=#ffffff;" vertex="1" parent="GUaNuJlXd1SZs9sNp0NW-1">
                     <mxGeometry x="280" y="410" width="200" height="90" as="geometry"/>
                 </mxCell>
                 <mxCell id="GUaNuJlXd1SZs9sNp0NW-9" value="Header" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#60a917;strokeColor=#2D7600;fontColor=#ffffff;" vertex="1" parent="GUaNuJlXd1SZs9sNp0NW-1">
@@ -166,7 +166,7 @@
                 <mxCell id="GUaNuJlXd1SZs9sNp0NW-13" value="- отображает кнопку входа выхода&lt;br&gt;- приветствие&lt;br&gt;- переход в уведомления для авторизованного" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;darkOpacity=0.05;fillColor=#60a917;strokeColor=#2D7600;fontColor=#ffffff;" vertex="1" parent="GUaNuJlXd1SZs9sNp0NW-1">
                     <mxGeometry x="640" y="150" width="200" height="130" as="geometry"/>
                 </mxCell>
-                <mxCell id="GUaNuJlXd1SZs9sNp0NW-14" value="- умеет отображать Backdrop&lt;br&gt;- меняет вкладки&lt;br&gt;" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;darkOpacity=0.05;" vertex="1" parent="GUaNuJlXd1SZs9sNp0NW-1">
+                <mxCell id="GUaNuJlXd1SZs9sNp0NW-14" value="- умеет отображать Backdrop&lt;br&gt;" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;darkOpacity=0.05;" vertex="1" parent="GUaNuJlXd1SZs9sNp0NW-1">
                     <mxGeometry x="640" y="40" width="200" height="90" as="geometry"/>
                 </mxCell>
                 <mxCell id="GUaNuJlXd1SZs9sNp0NW-15" value="- умеет отображать Backdrop&lt;br&gt;- меняет вкладки&lt;br&gt;" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;darkOpacity=0.05;fillColor=#6a00ff;strokeColor=#3700CC;fontColor=#ffffff;" vertex="1" parent="GUaNuJlXd1SZs9sNp0NW-1">
