@@ -1,11 +1,11 @@
 import { IPerson } from "../data/person";
 
 export enum PersonsAction {
-    Add,
-    Remove,
-    AddAll,
-    RemoveAll,
-    Filter
+    Add = 'persons_add',
+    Remove = 'persons_remove',
+    AddAll = 'persons_add_all',
+    RemoveAll = 'persons_remove_all',
+    Filter = 'persons_filter'
 }
 
 export interface IFilter {

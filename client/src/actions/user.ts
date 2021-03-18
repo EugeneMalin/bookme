@@ -1,9 +1,9 @@
 import { IUser } from "../data/user";
 
 export enum UserAction {
-    Update,
-    Unset,
-    Set
+    Update = 'user_update',
+    Unset = 'user_unset',
+    Set = 'user_set'
 }
 
 export interface IUserAction {
