@@ -1,5 +1,5 @@
 import { Theme } from '@material-ui/core';
-import { createStyles, makeStyles } from '@material-ui/styles';
+import { createStyles, makeStyles } from '@material-ui/core';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import actions from './actions';
@@ -14,10 +14,12 @@ const useStyles = makeStyles((theme: Theme) =>
     background: {
       display: 'flex',
       flexDirection: 'column',
+      justifyContent: 'center',
       minHeight: 0,
       minWidth: 0,
       flexGrow: 1,
-      padding: '8px'
+      padding: `${theme.spacing()}px auto ${theme.spacing()}px auto`,
+      maxWidth: 1024
     },
     header: {
       display: 'flex',
@@ -72,11 +74,15 @@ export const App = () => {
         }}
         onSignUp={() => {
           setOpen(true);
-          setTimeout(() => setOpen(false), 1000);
-          dispatch(actions.persons.add({
-            id: index++,
-            name: `Person #${index}`
-          }))
+          setTimeout(() => {
+            setOpen(false);
+            dispatch(actions.persons.add({
+              id: index++,
+              name: `${index % 2 ? 'Jonh' : index % 3 ? 'Elisa' : 'Karl'}`,
+              surname: `${index % 2 ? 'Smith' : index % 3 ? 'Marks' : 'Malin'}`,
+              bio: `The person, which created ${index} position!`
+            }));
+          }, 1000);
         }}
         onReadNotifications={() => {
           setOpen(true);
