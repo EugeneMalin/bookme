@@ -1,4 +1,4 @@
-import { createStyles, makeStyles, Theme } from "@material-ui/core"
+import { Card, CardContent, createStyles, makeStyles, Theme, Typography } from "@material-ui/core"
 import { useSelector } from "react-redux"
 import { IPerson, Person } from "../../data/person";
 import { IStore } from "../../store";
@@ -14,6 +14,20 @@ const useStyles = makeStyles((theme: Theme) =>
     person: {
         height: 150,
         width: 250
+    },
+    container: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: '100%',
+        width: '100%'
+    },
+    empty: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: '30vh',
+        width: '40vw'
     }
   })
 );
@@ -24,7 +38,10 @@ export const PesronList = () => {
         const person = new Person(personDto);
         return <PersonInfo key={person.id} className={classes.person} person={person}/>
     });
-    return <div className={classes.persons}>
-        {persons}
-    </div>
-}
+    return persons.length ? <div className={classes.persons}>{persons}</div> : <div className={classes.container}>
+            <Card className={classes.empty}>
+                <CardContent>
+                    <Typography>There are no people here!</Typography>
+                </CardContent>
+            </Card>    
+        </div>}
