@@ -1,5 +1,8 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/styles';
+import { Header } from './components/Header';
+import { Content } from './components/Content';
+import { Footer } from './components/Footer';
 
 export interface IApp {
 
@@ -25,9 +28,9 @@ export const App = (props: IApp) => {
   const classes = useStyles()
   return (
     <>
-      <header className={classes.header} >Привет мир!</header>
-      <main className={classes.main} >Привет мир!</main>
-      <footer className={classes.footer} >Привет мир!</footer>
+      <Header className={classes.header} />
+      <Content className={classes.main} />
+      <Footer className={classes.footer} />
     </>
   );
 };
