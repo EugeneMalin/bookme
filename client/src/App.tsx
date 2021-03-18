@@ -38,17 +38,25 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export const App = (props: IApp) => {
   const [open, setOpen] = useState(false);
+  const [user, setUser] = useState<{
+    name: string
+  }|null>(null);
   const classes = useStyles()
   return (
     <Background className={classes.background} open={open}>
       <Header 
+        user={user}
         className={classes.header}
         onLogIn={() => {
           setOpen(true);
+          setUser({
+            name: 'Василий'
+          });
           setTimeout(() => setOpen(false), 1000)
         }}
         onLogOut={() => {
           setOpen(true);
+          setUser(null);
           setTimeout(() => setOpen(false), 1000)
         }}
         onSignUp={() => {
