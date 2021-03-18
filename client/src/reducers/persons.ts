@@ -10,7 +10,7 @@ export const reducer = (store: IPerson[] = [], action: IPersonsAction) => {
             if (store.includes(action.person)) return store;
 
             store.push(action.person);
-            return store;
+            return store.slice();
         case PersonsAction.AddAll:
             if (!action.persons) return store;
             action.persons.forEach((person) => {
@@ -18,7 +18,7 @@ export const reducer = (store: IPerson[] = [], action: IPersonsAction) => {
                     store.push(person);
                 }
             })
-            return store;
+            return store.slice();
     
         case PersonsAction.Remove:
             if (!action.person) return store;
@@ -32,7 +32,7 @@ export const reducer = (store: IPerson[] = [], action: IPersonsAction) => {
                 if (index < 0) return;
                 indexes.push(index);
             });
-        return store.filter((_, i) => !indexes.includes(i));
+            return store.filter((_, i) => !indexes.includes(i));
         case PersonsAction.Filter: 
             if (!action.filter) return store;
             return store.filter((person) => {
