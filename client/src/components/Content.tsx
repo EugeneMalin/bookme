@@ -5,7 +5,7 @@ export interface IContent extends IBase {
 }
 
 export const Content = (props: IContent) => {
-    return <main>
+    return <main className={props.className}>
         Содержимое сайта
     </main>
 }
