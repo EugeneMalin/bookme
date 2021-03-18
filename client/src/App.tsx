@@ -1,14 +1,13 @@
 import { Theme } from '@material-ui/core';
 import { createStyles, makeStyles } from '@material-ui/styles';
 import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import actions from './actions';
 import { Background } from './components/Background';
 import { Content } from './components/Content';
 import { Footer } from './components/Footer';
 import { Header } from './components/Header';
-
-export interface IApp {
-
-}
+import { IStore } from './store';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -36,11 +35,12 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export const App = (props: IApp) => {
+export const App = () => {
   const [open, setOpen] = useState(false);
-  const [user, setUser] = useState<{
-    name: string
-  }|null>(null);
+
+  const user = useSelector<IStore>(state => state.user);
+  const dispatch = useDispatch()
+
   const classes = useStyles()
   return (
     <Background className={classes.background} open={open}>
@@ -52,16 +52,20 @@ export const App = (props: IApp) => {
           setTimeout(() => {
             setOpen(false)
         
-            setUser({
-              name: 'Василий'
-            });
+            dispatch(actions.user.set({
+              id: 22,
+              name: 'Ivan',
+              email: 'ivan@gmail.ru',
+              login: 'test'
+            }));
           }, 1000)
         }}
         onLogOut={() => {
           setOpen(true);
           setTimeout(() => {
             setOpen(false);
-            setUser(null);
+            
+            dispatch(actions.user.unset());
           }, 1000)
         }}
         onSignUp={() => {
