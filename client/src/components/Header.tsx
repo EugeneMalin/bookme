@@ -1,6 +1,6 @@
 import { IBase } from "./Base"
 import logo from "../logo.svg";
-import { Button, createStyles, makeStyles, PropTypes, Theme } from "@material-ui/core";
+import { Button, createStyles, makeStyles, Paper, PropTypes, Theme } from "@material-ui/core";
 import { ReactNode } from "react";
 
 export interface IHeader extends IBase {
@@ -19,17 +19,24 @@ const useStyles = makeStyles((theme: Theme) =>
       container: {
         display: 'flex'
     },
+    paper: {
+      display: 'flex',
+      width: '100%',
+      height: '100%'
+    },
       logo: {
         height: '10vh',
         width: '10vh',
-        marginRight: theme.spacing()
+        marginRight: theme.spacing(),
+        padding: theme.spacing(1)
       },
       greeting: {
         alignSelf: 'center'
     },
       action: {
         marginLeft: theme.spacing(),
-        textDecoration: 'none'
+        textDecoration: 'none',
+        width: '100px'
     },
       actions: {
         display: 'flex',
@@ -47,7 +54,7 @@ interface IActionParams {
 }
 
 function getActionButton({caption, className, action, color}: IActionParams): ReactNode {
-    return <Button className={className} variant="outlined" onClick={action} color={color}>{caption}</Button>;
+    return <Button className={className} onClick={action} color={color}>{caption}</Button>;
 }
 
 export const Header = (props: IHeader) => {
@@ -58,11 +65,13 @@ export const Header = (props: IHeader) => {
     // todo create notifications center
     //const notificationsBtn = getActionButton({className: classes.action, action: props.onReadNotifications, caption: 'Read me'});
     return <header className={`${props.className} ${classes.container}`}>
+      <Paper className={classes.paper} elevation={0}>
         <img className={classes.logo} src={logo} alt="ReadMe"/>
-        <span className={classes.greeting}>Добро пожаловать{props.user?.name ? `, ${props.user?.name}!`: '!'}</span>
+        <span className={classes.greeting}>Welcome{props.user?.name ? `, ${props.user?.name}!`: '!'}</span>
         <div className={classes.actions}>
             {props.user ? logOutBtn : loginBtn}
             {props.user ? null : signupBtn}
         </div>
+      </Paper>
     </header>
 }
