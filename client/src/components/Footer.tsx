@@ -7,6 +7,7 @@ import LibraryBooksIcon from '@material-ui/icons/LibraryBooks';
 import { useDispatch, useSelector } from "react-redux";
 import { IStore } from "../store";
 import actions from "../actions";
+import { BOOKS_TAB_ID, HOME_TAB_ID, PEOPLE_TAB_ID } from "../const";
 
 export interface IFooter extends IBase {
 
@@ -28,9 +29,9 @@ export const Footer = (props: IFooter) => {
 
   return <footer className={props.className}>
         <BottomNavigation value={value} onChange={handleChange} className={classes.root}>
-            <BottomNavigationAction label="Home" value="home" icon={<HomeIcon />} />
-            <BottomNavigationAction label="People" value="people" icon={<PeopleIcon />} />
-            <BottomNavigationAction label="Books" value="books" icon={<LibraryBooksIcon />} />
+            <BottomNavigationAction label="Home" value={HOME_TAB_ID} icon={<HomeIcon />} />
+            <BottomNavigationAction label="People" value={PEOPLE_TAB_ID} icon={<PeopleIcon />} />
+            <BottomNavigationAction label="Books" value={BOOKS_TAB_ID} icon={<LibraryBooksIcon />} />
         </BottomNavigation>
     </footer>
 }

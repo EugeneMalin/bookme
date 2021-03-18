@@ -1,9 +1,9 @@
 import { createStyles, makeStyles, Theme } from "@material-ui/core"
 import { useSelector } from "react-redux"
-import { IPerson, Person } from "../data/person"
+import { PEOPLE_TAB_ID } from "../const"
 import { IStore } from "../store"
 import { IBase } from "./Base"
-import { PersonInfo } from "./person/Info"
+import { PesronList } from "./person/List"
 
 export interface IContent extends IBase {}
 
@@ -29,17 +29,22 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
+function getContentById(tabId: string) {
+    switch(tabId) {
+        case PEOPLE_TAB_ID:
+            return <PesronList/>;
+        default: 
+            return <div>
+                Sorry! We are stil working for this page!
+            </div>
+    }
+}
+
 export const Content = (props: IContent) => {
     const classes = useStyles();
-    const persons = useSelector<IStore, IPerson[]>(store => store.persons).map((personDto) => {
-        const person = new Person(personDto);
-        return <PersonInfo key={person.id} className={classes.person} person={person}/>
-    });
     const tabId = useSelector<IStore, string>(store => store.tabId);
+    
     return <main className={classes.wrapper + ' ' + props.className}>
-        <h3>{tabId}</h3>
-        <div className={classes.persons}>
-            {persons}
-        </div>
+        {getContentById(tabId)}
     </main>
 }
