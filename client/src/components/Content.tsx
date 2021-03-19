@@ -1,9 +1,11 @@
 import { createStyles, makeStyles, Theme } from "@material-ui/core"
 import { useSelector } from "react-redux"
-import { PEOPLE_TAB_ID } from "../const"
+import { BOOKS_TAB_ID, PEOPLE_TAB_ID } from "../const"
+import { User } from "../data/user"
 import { IStore } from "../store"
 import { IBase } from "./Base"
 import { PesronList } from "./person/List"
+import { UserForm } from "./user/Form"
 
 export interface IContent extends IBase {}
 
@@ -33,6 +35,19 @@ function getContentById(tabId: string) {
     switch(tabId) {
         case PEOPLE_TAB_ID:
             return <PesronList/>;
+        case BOOKS_TAB_ID: 
+            return <div>
+                <UserForm/>
+                <UserForm user={new User({
+                    id: 1,
+                    name: 'Name',
+                    surname: 'Surname',
+                    login: 'string',
+                    email: 'string@sd.sdsd',
+                    createdAt: new Date(2000, 10, 10),
+                    bio: 'Testign Test'
+                })}/>
+            </div>
         default: 
             return <div>
                 Sorry! We are stil working for this page!
