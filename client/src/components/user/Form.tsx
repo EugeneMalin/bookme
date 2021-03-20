@@ -7,6 +7,8 @@ import { IUser, User } from "../../data/user";
 
 interface IUserForm {
     user?: User;
+    onSave: (user: IUserData) => void;
+    onClose: () => void;
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -14,10 +16,6 @@ const useStyles = makeStyles((theme: Theme) =>
     root: {
       maxWidth: 345,
       margin: theme.spacing()
-    },
-    media: {
-      height: 0,
-      paddingTop: '56.25%', // 16:9
     },
     expand: {
       transform: 'rotate(0deg)',
@@ -42,7 +40,7 @@ interface IUserData extends IUser {
     password: string
 }
 
-export const UserForm = ({user}: IUserForm) => {
+export const UserForm = ({user, onSave, onClose}: IUserForm) => {
     const classes = useStyles();
     const [expanded, setExpanded] = useState(false);
     const [showPassword, setPasswordVisibility] = useState(false);
@@ -86,7 +84,7 @@ export const UserForm = ({user}: IUserForm) => {
                     id="password-field"
                     type={showPassword ? 'text' : 'password'}
                     value={editingUser.password}
-                    onChange={handleChange('email')}
+                    onChange={handleChange('password')}
                     endAdornment={
                         !!user ? null :
                         <InputAdornment position="end">
@@ -104,8 +102,12 @@ export const UserForm = ({user}: IUserForm) => {
             </FormControl>
         </CardContent>
         <CardActions disableSpacing>
-            <Button className={classes.action} variant="contained" color="primary">Save</Button>
-            <Button className={classes.action} variant="contained">Close</Button>
+            <Button className={classes.action} onClick={() => {
+                onSave(editingUser);
+            }} variant="contained" color="primary">Save</Button>
+            <Button className={classes.action} onClick={() => {
+                onClose();
+            }} variant="contained">Close</Button>
             <IconButton
                 className={clsx(classes.expand, {
                     [classes.expandOpen]: expanded,

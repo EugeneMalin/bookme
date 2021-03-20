@@ -1,6 +1,9 @@
 import { createStyles, makeStyles, Theme } from "@material-ui/core"
-import { useSelector } from "react-redux"
-import { BOOKS_TAB_ID, PEOPLE_TAB_ID } from "../const"
+import { useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import actions from "../actions"
+import { PEOPLE_TAB_ID } from "../const"
+import { IPerson } from "../data/person"
 import { User } from "../data/user"
 import { IStore } from "../store"
 import { IBase } from "./Base"
@@ -32,22 +35,10 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 function getContentById(tabId: string) {
+
     switch(tabId) {
         case PEOPLE_TAB_ID:
             return <PesronList/>;
-        case BOOKS_TAB_ID: 
-            return <div>
-                <UserForm/>
-                <UserForm user={new User({
-                    id: 1,
-                    name: 'Name',
-                    surname: 'Surname',
-                    login: 'string',
-                    email: 'string@sd.sdsd',
-                    createdAt: new Date(2000, 10, 10),
-                    bio: 'Testign Test'
-                })}/>
-            </div>
         default: 
             return <div>
                 Sorry! We are stil working for this page!
@@ -58,8 +49,47 @@ function getContentById(tabId: string) {
 export const Content = (props: IContent) => {
     const classes = useStyles();
     const tabId = useSelector<IStore, string>(store => store.tabId);
+    const [oneUser, setOneUser] = useState(new User({
+        id: 1,
+        name: 'Name',
+        surname: 'Surname',
+        login: 'string',
+        email: 'string@sd.sdsd',
+        createdAt: new Date(2000, 10, 10),
+        bio: 'Testign Test'
+    }))
+    
+    const dispatch = useDispatch();
+    const persons = useSelector<IStore, IPerson[]>(store => store.persons)
     
     return <main className={classes.wrapper + ' ' + props.className}>
         {getContentById(tabId)}
+        <div>
+            <UserForm
+                onSave={(user) => {
+                    dispatch(actions.persons.add({
+                        id: persons.length + 1,
+                        name: user.name,
+                        surname: user.surname,
+                        patronymic: user.patronymic,
+                        bio: user.bio,
+                        createdAt: user.createdAt
+                        }));
+                }}
+                onClose={() => {
+
+                }}
+            />
+            <UserForm 
+                user={oneUser}
+                
+                onSave={(user) => {
+                    setOneUser(new User(user));
+                }}
+                onClose={() => {
+                    setOneUser(oneUser);
+                }}
+            />
+        </div>
     </main>
 }
