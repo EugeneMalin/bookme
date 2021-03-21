@@ -5,7 +5,7 @@ import { ChangeEvent, useState } from "react";
 import clsx from 'clsx';
 import { IUser, User } from "../../data/user";
 
-interface IUserForm {
+interface IUserEditor {
     user?: User;
     onSave: (user: IUserData) => void;
     onClose: () => void;
@@ -32,6 +32,9 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     action: {
       marginRight: theme.spacing()
+    },
+    changePassword: {
+        marginTop: theme.spacing()
     }
   }),
 );
@@ -40,7 +43,7 @@ interface IUserData extends IUser {
     password: string
 }
 
-export const UserForm = ({user, onSave, onClose}: IUserForm) => {
+export const UserEditor = ({user, onSave, onClose}: IUserEditor) => {
     const classes = useStyles();
     const [expanded, setExpanded] = useState(false);
     const [showPassword, setPasswordVisibility] = useState(false);
@@ -78,7 +81,9 @@ export const UserForm = ({user, onSave, onClose}: IUserForm) => {
             <TextField fullWidth value={editingUser.patronymic} onChange={handleChange('patronymic')} id="patronymic-field" label="Patronymic" />
             <TextField fullWidth disabled={!!user} value={editingUser.login} onChange={handleChange('login')} id="login-field" label="Login" />
             <TextField fullWidth disabled={!!user} value={editingUser.email} onChange={handleChange('email')} id="email-field" label="Email" />
-            <FormControl fullWidth disabled={!!user}>
+            { !!user ? <div className={classes.changePassword}>
+                Тут будет переход на смену пароля/email/login :)
+            </div> : <FormControl fullWidth>
                 <InputLabel htmlFor="password-field">Password</InputLabel>
                 <Input
                     id="password-field"
@@ -99,7 +104,7 @@ export const UserForm = ({user, onSave, onClose}: IUserForm) => {
                         </InputAdornment>
                     }
                 />
-            </FormControl>
+            </FormControl>}
         </CardContent>
         <CardActions disableSpacing>
             <Button className={classes.action} onClick={() => {

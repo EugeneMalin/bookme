@@ -8,7 +8,7 @@ import { User } from "../data/user"
 import { IStore } from "../store"
 import { IBase } from "./Base"
 import { PesronList } from "./person/List"
-import { UserForm } from "./user/Form"
+import { UserEditor } from "./user/Editor"
 
 export interface IContent extends IBase {}
 
@@ -65,7 +65,7 @@ export const Content = (props: IContent) => {
     return <main className={classes.wrapper + ' ' + props.className}>
         {getContentById(tabId)}
         <div>
-            <UserForm
+            <UserEditor
                 onSave={(user) => {
                     dispatch(actions.persons.add({
                         id: persons.length + 1,
@@ -80,7 +80,7 @@ export const Content = (props: IContent) => {
 
                 }}
             />
-            <UserForm 
+            <UserEditor 
                 user={oneUser}
                 
                 onSave={(user) => {
